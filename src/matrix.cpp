@@ -1,5 +1,4 @@
-#include "imports.h"
-
+#include "../lib/imports.h"
 
 Matrix::Matrix(int height, int width){
     content = new double*[height];
