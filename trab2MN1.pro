@@ -15,15 +15,18 @@ TEMPLATE = app
 SOURCES +=  src/main.cpp\
             src/mainwindow.cpp \
             src/matrix.cpp \
-    src/gauss.cpp \
-    src/listResults.cpp \
-    src/result.cpp
+            src/gauss.cpp \
+            src/listResults.cpp \
+            src/result.cpp\
+            src/dialog.cpp
 
 HEADERS  += lib/mainwindow.h \
-    lib/imports.h \
-    lib/matrix.h \
-    lib/listResults.h \
-    lib/gauss.h \
-    lib/result.h
+            lib/imports.h \
+            lib/matrix.h \
+            lib/listResults.h \
+            lib/gauss.h \
+            lib/result.h\
+            lib/dialog.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui\
+            dialog.ui

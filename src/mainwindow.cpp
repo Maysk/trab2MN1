@@ -4,21 +4,25 @@
 #include "../lib/imports.h"
 #include "../lib/mainwindow.h"
 #include "ui_mainwindow.h"
-QTableWidget *tableC,*tableD,*tableRGauss,*tableRGaussJordan;
+QTableWidget *tableC,*tableD,*tableRGauss,*tableRGaussJordan,*tableRGaussComp,*tableRGaussJordanComp;
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    tableC = ui->tableC;
-    tableD = ui->tableD;
-    tableRGauss = ui->tableRGauss;
-    tableRGaussJordan = ui->tableRGaussJordan;
+    tableC                = ui->tableC;
+    tableD                = ui->tableD;
+    tableRGauss           = ui->tableRGauss;
+    tableRGaussComp       = ui->tableRGaussComp;
+    tableRGaussJordan     = ui->tableRGaussJordan;
+    tableRGaussJordanComp = ui->tableRGaussJordanComp;
     int valN = ui->spinBox_QtdC->value();
     setDimensionNxN( valN,tableC);
     setDimensionNx1( valN,tableD);
     setDimensionNx1( valN,tableRGauss);
+    setDimensionNx1( valN,tableRGaussComp);
     setDimensionNx1( valN,tableRGaussJordan);
+    setDimensionNx1( valN,tableRGaussJordanComp);
 }
 
 void MainWindow::setDimensionNxN(int N,QTableWidget *table){
@@ -57,3 +61,11 @@ void MainWindow::on_spinBox_QtdC_valueChanged(int valN)
     setDimensionNx1( valN,tableRGauss);
     setDimensionNx1( valN,tableRGaussJordan);
 }
+
+void MainWindow::on_pushButton_clicked()
+{
+    Dialog *dialog = new Dialog(NULL,"Confirmado","Configurações confirmadas");
+    dialog->show();
+    //TODO: Ler valores e chamar métodos.
+}
+//TODO: Criar função que seta os valores nas tabelas,passo a passo e labels

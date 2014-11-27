@@ -16,9 +16,11 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_spinBox_QtdC_valueChanged(int arg1);
+    void on_spinBox_QtdC_valueChanged(int valN);
     void setDimensionNxN(int N,QTableWidget *table);
     void setDimensionNx1(int N,QTableWidget *table);
+
+    void on_pushButton_clicked();
 
 private:
     Ui::MainWindow *ui;

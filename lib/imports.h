@@ -5,6 +5,7 @@
 #include <sstream>
 #include <string>
 
+#include "dialog.h"
 #include "mainwindow.h"
 #include "matrix.h"
 #include "result.h"
