@@ -16,9 +16,9 @@ public:
 
     bool isEmpty();
 
-    void push(double *result);
+    void push(Result *result);
 
-    double* pop();
+    Result *pop();
 
     int getLength();
 };

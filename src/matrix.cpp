@@ -36,3 +36,9 @@ double Matrix::getValue(int line, int column){
     return this->content[line][column];
 }
 
+int Matrix::getHeight(){
+    return this->height;
+}
+int Matrix::getWidth(){
+    return this->width;
+}

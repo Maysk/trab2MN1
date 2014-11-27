@@ -5,10 +5,13 @@ ListResults::ListResults(){
     this->last=NULL;
     this->lenght=0;
 }
+
 ListResults::~ListResults(){
+    //TODO
     while(!this->isEmpty())
         this->pop();
 }
+
 bool ListResults::isEmpty(){
     if(this->lenght == 0){
         return true;
@@ -17,11 +20,14 @@ bool ListResults::isEmpty(){
         return false;
     }
 }
-void ListResults::push(double *result){
+
+void ListResults::push(Result* result){
     NodeResult *node;
-    node=new NodeResult;
-    node->result=result;
-    node->next=NULL;
+    node = new NodeResult;
+
+    node->result = result;
+    node->next = NULL;
+
     if(this->isEmpty()){
         this->first=node;
         this->last=node;
@@ -32,16 +38,17 @@ void ListResults::push(double *result){
     }
     this->lenght= this->lenght+1;
 }
-double* ListResults::pop(){
+
+Result* ListResults::pop(){
     NodeResult *node;
     if(this->isEmpty()){
         cout << "Está vazia. UnderFlow" << endl;
         node=NULL;
     }
     else{
-        this->lenght=this->lenght-1;
-        node=this->first;
-        this->first=node->next;
+        this->lenght = this->lenght-1;
+        node = this->first;
+        this->first = node->next;
     }
     return node->result;
 }

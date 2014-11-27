@@ -13,4 +13,7 @@ public:
     void setValue(int line, int column, double newValue);
     double getValue(int line, int column);
 
+    int getHeight();
+    int getWidth();
+
 };
