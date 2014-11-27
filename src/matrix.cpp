@@ -10,7 +10,6 @@ Matrix::Matrix(int height, int width){
     }
 }
 
-
 Matrix::~Matrix(){
     for(int i=0; i < this->height ;i++){
         delete [] content[i];

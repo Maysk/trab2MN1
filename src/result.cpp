@@ -1,11 +1,13 @@
 #include "../lib/imports.h"
 Result::Result(){
-    this->matrix = NULL;
+    this->coefficientMatrix = NULL;
+    this->independentTermsMatrix = NULL;
     this->description = "";
 }
 
-Result::Result(Matrix *matrix, std::string description){
-    this->matrix = matrix;
+Result::Result(Matrix *coefficientMatrix, Matrix *independentTermsMatrix, std::string description){
+    this->coefficientMatrix = coefficientMatrix;
+    this->independentTermsMatrix = independentTermsMatrix;
     this->description = description;
 }
 
@@ -17,10 +19,18 @@ std::string Result::getDescription(){
     return this->description;
 }
 
-void Result::setMatrix(Matrix *matrix){
-    this->matrix = matrix;
+void Result::setCoefficienMatrix(Matrix *matrix){
+    this->coefficientMatrix = matrix;
 }
 
-Matrix *Result::getMatrix(){
-    return this->matrix;
+Matrix *Result::getCoefficienMatrix(){
+    return this->coefficientMatrix;
+}
+
+void Result::setIndependentTerms(Matrix *matrix){
+    this->independentTermsMatrix = matrix;
+}
+
+Matrix *Result::getIndependentTerms(){
+    return this->independentTermsMatrix;
 }
