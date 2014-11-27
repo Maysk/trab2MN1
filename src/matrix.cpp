@@ -35,7 +35,6 @@ void Matrix::setValue(int line, int column, double newValue){
 double Matrix::getValue(int line, int column){
     return this->content[line][column];
 }
-<<<<<<< HEAD
 
 int Matrix::getHeight(){
     return this->height;
@@ -43,5 +42,4 @@ int Matrix::getHeight(){
 int Matrix::getWidth(){
     return this->width;
 }
-=======
->>>>>>> 32ffefb866ae635aba4c5f7ee0f041dd767ce6e6
+
