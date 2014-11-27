@@ -3,6 +3,8 @@
 #include <iomanip>
 #include <fstream>
 #include <sstream>
+#include <string>
+
 #include "matrix.h"
 #include "result.h"
 #include "listResults.h"
