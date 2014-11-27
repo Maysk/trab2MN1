@@ -1,13 +1,32 @@
 #include "../lib/imports.h"
 
-void GaussTemplate::setCoefficienMatrix(Matrix *matrix){}
-Matrix *GaussTemplate::getCoefficienMatrix(){}
 
-void GaussTemplate::setIndependentTerms(Matrix* matrix){}
-Matrix *GaussTemplate::getIndependentTerms(){}
+GaussTemplate::GaussTemplate(Matrix* independentTermsMatrix, Matrix* coefficientMatrix){
+    this->independentTermsMatrix = independentTermsMatrix;
+    this->coefficientMatrix = coefficientMatrix;
+}
 
-Matrix *GaussTemplate::getUnknownsMatrix(){}
+void GaussTemplate::setCoefficienMatrix(Matrix *matrix){
+    this->coefficientMatrix = matrix;
+}
+Matrix *GaussTemplate::getCoefficienMatrix(){
+    return this->coefficientMatrix;
+}
 
+void GaussTemplate::setIndependentTerms(Matrix* matrix){
+    this->independentTermsMatrix = matrix;
+}
+Matrix *GaussTemplate::getIndependentTerms(){
+    return this->independentTermsMatrix;
+}
+
+Matrix *GaussTemplate::getUnknownsMatrix(){
+    return this->unknownsMatrix;
+}
+
+//TODO
 void GaussTemplate::retroSubstitutions(){}
+
+//TODO
 void GaussTemplate::saveOnList(){}
 

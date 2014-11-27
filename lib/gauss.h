@@ -1,8 +1,8 @@
 class Gauss : public GaussTemplate{
-    Matrix* coefficientMatrix;
-    Matrix* independentTermsMatrix;
+    Matrix* coefficientMatrixTemp;
+    Matrix* independentTermsMatrixTemp;
 public:
-    Gauss(Matrix* independentTermsMatrix, Matrix* independentTermsMatrix);
+    Gauss(Matrix* independentTermsMatrix, Matrix* coefficientMatrix);
 
     void beforeSolve();
     void resolveSytem();

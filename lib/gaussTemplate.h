@@ -5,7 +5,7 @@ class GaussTemplate {
 
 public:
 
-    GaussTemplate(Matrix* independentTermsMatrix, Matrix* independentTermsMatrix);
+    GaussTemplate(Matrix* independentTermsMatrix, Matrix* coefficientMatrix);
 
     void setCoefficienMatrix(Matrix *matrix);
     Matrix *getCoefficienMatrix();
@@ -18,8 +18,8 @@ public:
     void retroSubstitutions();
     void saveOnList();
 
-    void beforeSolve() = 0;
-    void resolveSytem() = 0;
-    void afterSolve() = 0;
+    virtual void beforeSolve() = 0;
+    virtual void resolveSytem() = 0;
+    virtual void afterSolve() = 0;
 
 };
