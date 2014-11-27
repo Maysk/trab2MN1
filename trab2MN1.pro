@@ -14,10 +14,16 @@ TEMPLATE = app
 
 SOURCES +=  src/main.cpp\
             src/mainwindow.cpp \
-            src/matrix.cpp
+            src/matrix.cpp \
+    src/gauss.cpp \
+    src/listResults.cpp \
+    src/result.cpp
 
 HEADERS  += lib/mainwindow.h \
     lib/imports.h \
-    lib/matrix.h
+    lib/matrix.h \
+    lib/listResults.h \
+    lib/gauss.h \
+    lib/result.h
 
 FORMS    += mainwindow.ui

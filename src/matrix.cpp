@@ -1,6 +1,5 @@
 #include "../lib/imports.h"
 
-
 Matrix::Matrix(int height, int width){
     content = new double*[height];
         for(int i=0; i < height; i++){
@@ -36,4 +35,3 @@ void Matrix::setValue(int line, int column, double newValue){
 double Matrix::getValue(int line, int column){
     return this->content[line][column];
 }
-
