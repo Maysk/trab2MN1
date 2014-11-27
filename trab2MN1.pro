@@ -18,7 +18,8 @@ SOURCES +=  src/main.cpp\
             src/gauss.cpp \
             src/listResults.cpp \
             src/result.cpp\
-            src/dialog.cpp
+            src/dialog.cpp \
+    src/gaussTemplate.cpp
 
 HEADERS  += lib/mainwindow.h \
             lib/imports.h \
@@ -26,7 +27,8 @@ HEADERS  += lib/mainwindow.h \
             lib/listResults.h \
             lib/gauss.h \
             lib/result.h\
-            lib/dialog.h
+            lib/dialog.h \
+    lib/gaussTemplate.h
 
 FORMS    += mainwindow.ui\
             dialog.ui

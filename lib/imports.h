@@ -10,6 +10,7 @@
 #include "matrix.h"
 #include "result.h"
 #include "listResults.h"
+#include "gaussTemplate.h"
 #include "gauss.h"
 
 using namespace std;
