@@ -4,20 +4,22 @@
 #include "../lib/imports.h"
 #include "../lib/mainwindow.h"
 #include "ui_mainwindow.h"
-QTableWidget *tableC,*tableD,*tableRGauss,*tableRGaussJordan,*tableRGaussComp,*tableRGaussJordanComp,*tableAreaGauss,*tableAreaGaussJordan;
+QTableWidget *tableC,*tableD,*tableRGauss,*tableRGaussJordan,*tableRGaussComp,*tableRGaussJordanComp,*tableAreaGauss,*tableAreaGaussJordan, *tableAreaGaussComp, *tableAreaGaussJordanComp;
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    tableC                = ui->tableC;
-    tableD                = ui->tableD;
-    tableRGauss           = ui->tableRGauss;
-    tableAreaGauss        = ui->tableAreaGauss;
-    tableRGaussComp       = ui->tableRGaussComp;
-    tableRGaussJordan     = ui->tableRGaussJordan;
-    tableAreaGaussJordan  = ui->tableAreaGaussJordan;
-    tableRGaussJordanComp = ui->tableRGaussJordanComp;
+    tableC                   = ui->tableC;
+    tableD                   = ui->tableD;
+    tableRGauss              = ui->tableRGauss;
+    tableAreaGauss           = ui->tableAreaGauss;
+    tableRGaussComp          = ui->tableRGaussComp;
+    tableRGaussJordan        = ui->tableRGaussJordan;
+    tableAreaGaussComp       = ui->tableAreaGaussComp;
+    tableAreaGaussJordan     = ui->tableAreaGaussJordan;
+    tableRGaussJordanComp    = ui->tableRGaussJordanComp;
+    tableAreaGaussJordanComp = ui->tableAreaGaussJordanComp;
 
     int valN = ui->spinBox_QtdC->value();
     setDimensionNxN( valN,tableC);
@@ -26,8 +28,10 @@ MainWindow::MainWindow(QWidget *parent) :
     setDimensionNx1( valN,tableAreaGauss);
     setDimensionNx1( valN,tableRGaussComp);
     setDimensionNx1( valN,tableRGaussJordan);
+    setDimensionNx1( valN,tableAreaGaussComp);
     setDimensionNx1( valN,tableAreaGaussJordan);
     setDimensionNx1( valN,tableRGaussJordanComp);
+    setDimensionNx1( valN,tableAreaGaussJordanComp);
 }
 
 void MainWindow::setDimensionNxN(int N,QTableWidget *table){
@@ -64,7 +68,13 @@ void MainWindow::on_spinBox_QtdC_valueChanged(int valN)
     setDimensionNxN( valN,tableC);
     setDimensionNx1( valN,tableD);
     setDimensionNx1( valN,tableRGauss);
+    setDimensionNx1( valN,tableAreaGauss);
+    setDimensionNx1( valN,tableRGaussComp);
     setDimensionNx1( valN,tableRGaussJordan);
+    setDimensionNx1( valN,tableAreaGaussComp);
+    setDimensionNx1( valN,tableAreaGaussJordan);
+    setDimensionNx1( valN,tableRGaussJordanComp);
+    setDimensionNx1( valN,tableAreaGaussJordanComp);
 }
 
 void MainWindow::on_pushButton_clicked()

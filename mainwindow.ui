@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -160,7 +160,7 @@
          </rect>
         </property>
         <property name="text">
-         <string>Usar Pivotiamento</string>
+         <string>Usar Pivoteamento</string>
         </property>
        </widget>
        <widget class="QTableWidget" name="tableRGauss">
@@ -354,7 +354,7 @@
          </rect>
         </property>
         <property name="text">
-         <string>Usar Pivotiamento</string>
+         <string>Usar Pivoteamento</string>
         </property>
        </widget>
        <widget class="QLabel" name="labelTimeGaussJordan">
@@ -505,14 +505,14 @@
        <widget class="QRadioButton" name="radioButtonComp">
         <property name="geometry">
          <rect>
-          <x>546</x>
+          <x>680</x>
           <y>0</y>
           <width>161</width>
           <height>22</height>
          </rect>
         </property>
         <property name="text">
-         <string>Usar Pivotiamento</string>
+         <string>Usar Pivoteamento</string>
         </property>
        </widget>
        <widget class="QTableWidget" name="tableRGaussComp">
@@ -529,7 +529,7 @@
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>20</y>
+          <y>0</y>
           <width>181</width>
           <height>17</height>
          </rect>
@@ -541,8 +541,8 @@
        <widget class="QLabel" name="label_8">
         <property name="geometry">
          <rect>
-          <x>480</x>
-          <y>20</y>
+          <x>420</x>
+          <y>0</y>
           <width>231</width>
           <height>17</height>
          </rect>
@@ -554,7 +554,7 @@
        <widget class="QTableWidget" name="tableRGaussJordanComp">
         <property name="geometry">
          <rect>
-          <x>500</x>
+          <x>420</x>
           <y>40</y>
           <width>201</width>
           <height>331</height>
@@ -715,6 +715,78 @@
         </property>
         <property name="text">
          <string>0</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_27">
+        <property name="geometry">
+         <rect>
+          <x>690</x>
+          <y>20</y>
+          <width>67</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Áreas:</string>
+        </property>
+       </widget>
+       <widget class="QTableWidget" name="tableAreaGaussJordanComp">
+        <property name="geometry">
+         <rect>
+          <x>690</x>
+          <y>40</y>
+          <width>121</width>
+          <height>331</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_28">
+        <property name="geometry">
+         <rect>
+          <x>240</x>
+          <y>20</y>
+          <width>67</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Áreas:</string>
+        </property>
+       </widget>
+       <widget class="QTableWidget" name="tableAreaGaussComp">
+        <property name="geometry">
+         <rect>
+          <x>240</x>
+          <y>40</y>
+          <width>121</width>
+          <height>331</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_29">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>20</y>
+          <width>67</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Raios:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_30">
+        <property name="geometry">
+         <rect>
+          <x>420</x>
+          <y>20</y>
+          <width>67</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Raios:</string>
         </property>
        </widget>
       </widget>
