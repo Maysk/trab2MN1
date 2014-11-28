@@ -20,6 +20,8 @@ private slots:
     void setDimensionNxN(int N,QTableWidget *table);
     void setDimensionNx1(int N,QTableWidget *table);
 
+    void setMatrixCandD();
+
     void on_pushButton_clicked();
 
 private:

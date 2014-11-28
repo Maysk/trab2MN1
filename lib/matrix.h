@@ -16,4 +16,6 @@ public:
     int getHeight();
     int getWidth();
 
+    void printMatrix();
+
 };

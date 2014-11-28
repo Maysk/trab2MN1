@@ -8,6 +8,8 @@ Matrix::Matrix(int height, int width){
                 content[i][j] = 0;
             }
     }
+    this->width = width;
+    this->height = height;
 }
 
 Matrix::~Matrix(){
@@ -42,3 +44,10 @@ int Matrix::getWidth(){
     return this->width;
 }
 
+void Matrix::printMatrix(){
+    for(int i = 0 ; i < getHeight() ; i++){
+        for(int j = 0 ; j < getWidth() ; j++)
+            cout << getValue(i,j) << "  ";
+        cout << endl;
+    }
+}

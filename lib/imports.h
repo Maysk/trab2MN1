@@ -5,6 +5,7 @@
 #include <sstream>
 #include <string>
 
+using namespace std;
 #include "dialog.h"
 #include "mainwindow.h"
 #include "matrix.h"
@@ -13,4 +14,3 @@
 #include "gaussTemplate.h"
 #include "gauss.h"
 
-using namespace std;
