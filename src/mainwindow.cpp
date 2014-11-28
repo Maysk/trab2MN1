@@ -87,6 +87,16 @@ void MainWindow::on_spinBox_QtdC_valueChanged(int valN)
 void MainWindow::on_pushButton_clicked()
 {
     setMatrixCandD();
+
+    //resolução por Gauss
+//    Gauss *gauss = new Gauss(matrixD,matrixC);
+//    gauss->resolveSytem();
+//    Matrix *resolutionGauss = gauss->getUnknownsMatrix();
+//    resolutionGauss->printMatrix();
+//    setTable(resolutionGauss,tableRGauss);
+//    setTable(resolutionGauss,tableRGaussComp);
+    //resolução por Gauss fim
+
     Dialog *dialog = new Dialog(NULL,"Confirmado","Configurações confirmadas");
     dialog->show();
 }
@@ -109,7 +119,7 @@ void MainWindow::setMatrixCandD(){
     }
 }
 
-//TODO: Criar função que seta os valores nas tabelas,passo a passo e labels
+//TODO:passo a passo e labels
 void MainWindow::setTable(Matrix *matrix, QTableWidget *table){
     double lines = matrix->getHeight();
     double collumns = matrix->getWidth();
