@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 #include <QMainWindow>
 #include <QTableWidget>
-
+class Matrix;
 namespace Ui {
 class MainWindow;
 }
