@@ -15,6 +15,8 @@ void Gauss::resolveSytem(){
     double newValue_bi;
 
 
+    beforeSolve();
+
     Matrix *independentTerms = getIndependentTerms();
     Matrix *coefficients = getCoefficienMatrix();
 
@@ -35,6 +37,9 @@ void Gauss::resolveSytem(){
             }
         }
     }
+    retroSubstitutions();
+
+    afterSolve();
 }
 
 void Gauss::afterSolve(){

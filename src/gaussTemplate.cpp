@@ -25,7 +25,27 @@ Matrix *GaussTemplate::getUnknownsMatrix(){
 }
 
 //TODO
-void GaussTemplate::retroSubstitutions(){}
+void GaussTemplate::retroSubstitutions(){
+    Matrix *independentTerms = getIndependentTerms();
+    Matrix *coefficients = getCoefficienMatrix();
+    int numberOfLines = independentTerms->getHeight();
+
+    Matrix *unknowns = new Matrix(numberOfLines,1);
+    double unknown_k;
+    double sum;
+
+    unknown_k = coefficients->getValue(numberOfLines,1)/independentTerms->getValue(numberOfLines,numberOfLines);
+
+    for(int k=numberOfLines-2; k>=0; k--){
+        sum = 0;
+        for (int j=(k + 1); j <= numberOfLines-1; j++){
+            sum = sum + independentTerms->getValue(k,j) * unknowns->getValue(j,1);
+        }
+
+        unknown_k = (coefficients->getValue(k,1) - sum)/independentTerms->getValue(k,k);
+        unknowns->setValue(k,1,unknown_k);
+    }
+}
 
 //TODO
 void GaussTemplate::saveOnList(){}
