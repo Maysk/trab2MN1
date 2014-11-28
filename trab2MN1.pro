@@ -13,22 +13,22 @@ TEMPLATE = app
 
 
 SOURCES +=  src/main.cpp\
-            src/mainwindow.cpp \
             src/matrix.cpp \
-            src/gauss.cpp \
-            src/listResults.cpp \
             src/result.cpp\
+            src/listResults.cpp \
+            src/gaussTemplate.cpp \
+            src/gauss.cpp \
             src/dialog.cpp \
-    src/gaussTemplate.cpp
+            src/mainwindow.cpp \
 
-HEADERS  += lib/mainwindow.h \
-            lib/imports.h \
+HEADERS  += lib/imports.h \
             lib/matrix.h \
-            lib/listResults.h \
-            lib/gauss.h \
             lib/result.h\
+            lib/listResults.h \
+            lib/gaussTemplate.h \
+            lib/gauss.h \
             lib/dialog.h \
-    lib/gaussTemplate.h
+            lib/mainwindow.h \
 
 FORMS    += mainwindow.ui\
             dialog.ui
