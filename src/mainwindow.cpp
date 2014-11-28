@@ -4,7 +4,7 @@
 #include "../lib/imports.h"
 #include "../lib/mainwindow.h"
 #include "ui_mainwindow.h"
-QTableWidget *tableC,*tableD,*tableRGauss,*tableRGaussJordan,*tableRGaussComp,*tableRGaussJordanComp;
+QTableWidget *tableC,*tableD,*tableRGauss,*tableRGaussJordan,*tableRGaussComp,*tableRGaussJordanComp,*tableAreaGauss,*tableAreaGaussJordan;
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -13,15 +13,20 @@ MainWindow::MainWindow(QWidget *parent) :
     tableC                = ui->tableC;
     tableD                = ui->tableD;
     tableRGauss           = ui->tableRGauss;
+    tableAreaGauss        = ui->tableAreaGauss;
     tableRGaussComp       = ui->tableRGaussComp;
     tableRGaussJordan     = ui->tableRGaussJordan;
+    tableAreaGaussJordan  = ui->tableAreaGaussJordan;
     tableRGaussJordanComp = ui->tableRGaussJordanComp;
+
     int valN = ui->spinBox_QtdC->value();
     setDimensionNxN( valN,tableC);
     setDimensionNx1( valN,tableD);
     setDimensionNx1( valN,tableRGauss);
+    setDimensionNx1( valN,tableAreaGauss);
     setDimensionNx1( valN,tableRGaussComp);
     setDimensionNx1( valN,tableRGaussJordan);
+    setDimensionNx1( valN,tableAreaGaussJordan);
     setDimensionNx1( valN,tableRGaussJordanComp);
 }
 
