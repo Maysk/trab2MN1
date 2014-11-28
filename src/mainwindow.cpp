@@ -110,3 +110,14 @@ void MainWindow::setMatrixCandD(){
 }
 
 //TODO: Criar função que seta os valores nas tabelas,passo a passo e labels
+void MainWindow::setTable(Matrix *matrix, QTableWidget *table){
+    double lines = matrix->getHeight();
+    double collumns = matrix->getWidth();
+    for(int i = 0 ; i < lines ; i++){
+        for(int j = 0 ; j < collumns;j++){
+            QTableWidgetItem *cell = table->item(i,j);
+            cell->setText(QString::number(matrix->getValue(i,j),'g',10));
+        }
+    }
+
+}

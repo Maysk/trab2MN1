@@ -1,8 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
 #include <QMainWindow>
 #include <QTableWidget>
+
 namespace Ui {
 class MainWindow;
 }
@@ -22,6 +22,7 @@ private slots:
 
     void setMatrixCandD();
 
+    void setTable(Matrix *matrix, QTableWidget *table);
     void on_pushButton_clicked();
 
 private:
