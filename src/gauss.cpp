@@ -4,9 +4,16 @@ Gauss::Gauss(Matrix* independentTermsMatrix, Matrix* coefficientMatrix)
     :GaussTemplate(independentTermsMatrix, coefficientMatrix){}
 
 void Gauss::beforeSolve(){
+    Matrix* copy1 = getIndependentTerms()->getCopy();
+    Matrix* copy2 = getCoefficienMatrix()->getCopy();
+    this->independentTermsMatrixTemp = getIndependentTerms();
+    this->coefficientMatrixTemp = getCoefficienMatrix();
+    setIndependentTerms(copy1);
+    setCoefficienMatrix(copy2);
+
+    setExecutionTime(0);
     resetList();
-    this->independentTermsMatrixTemp = getIndependentTerms()->getCopy();
-    this->coefficientMatrixTemp = getCoefficienMatrix()->getCopy();
+
 }
 
 void Gauss::resolveSytem(){
@@ -14,19 +21,21 @@ void Gauss::resolveSytem(){
     double multiplier;
     double newValue_aij;
     double newValue_bi;
-
-
+    double executionTime = 0;
+    double start;
+    double end;
 
     beforeSolve();
 
+
     Matrix* coefficients = getCoefficienMatrix();
     Matrix* independentTerms = getIndependentTerms();
-
     numberOfLines = independentTerms->getHeight();
+
 
     for(int k = 0; k<=numberOfLines-2; k++){
         saveOnList("Operação realizada nesse ponto");
-
+        start = clock();
         for(int i = k +1; i<=numberOfLines-1;i++){
             multiplier = independentTerms->getValue(i,k)/independentTerms->getValue(k,k);
             independentTerms->setValue(i,k,0);
@@ -38,17 +47,25 @@ void Gauss::resolveSytem(){
 
             newValue_bi = coefficients->getValue(i,0) - multiplier * coefficients->getValue(k,0);
             coefficients->setValue(i,0,newValue_bi);
-
         }
+        end = clock();
+        executionTime = executionTime + (end - start);
     }
+
+    start = clock();
     retroSubstitutions();
+    end = clock();
+
+    executionTime = executionTime + (end - start);
+    setExecutionTime(executionTime/(double)CLOCKS_PER_SEC);
+
 
     afterSolve();
 }
 
 void Gauss::afterSolve(){
-    //delete getIndependentTerms();
-    //delete getCoefficienMatrix();
+    delete getIndependentTerms();
+    delete getCoefficienMatrix();
     setIndependentTerms(this->independentTermsMatrixTemp);
     setCoefficienMatrix(this->coefficientMatrixTemp);
 }

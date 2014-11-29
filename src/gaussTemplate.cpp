@@ -4,7 +4,9 @@
 GaussTemplate::GaussTemplate(Matrix* independentTermsMatrix, Matrix* coefficientMatrix){
     this->independentTermsMatrix = independentTermsMatrix;
     this->coefficientMatrix = coefficientMatrix;
+    this->unknownsMatrix = NULL;
     this->results = new ListResults();
+    this->executionTime = 0;
 }
 
 void GaussTemplate::setCoefficienMatrix(Matrix* matrix){
@@ -62,3 +64,10 @@ void GaussTemplate::saveOnList(std::string desc){
     results->push(parcialResult);
 }
 
+
+void GaussTemplate::setExecutionTime(double executionTime){
+    this->executionTime = executionTime;
+}
+double GaussTemplate::getExecutionTime(){
+    return this->executionTime;
+}
