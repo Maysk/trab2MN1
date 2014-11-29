@@ -2,6 +2,12 @@
 #define MAINWINDOW_H
 #include <QMainWindow>
 #include <QTableWidget>
+
+#include <QGraphicsScene>
+#include <QGraphicsView>
+#include <QGraphicsItem>
+#include <QGraphicsEllipseItem>
+
 class Matrix;
 namespace Ui {
 class MainWindow;
@@ -24,6 +30,8 @@ private slots:
 
     void setTable(Matrix *matrix, QTableWidget *table);
     void on_pushButton_clicked();
+
+    void desenhar(int n, double raios[]);
 
 private:
     Ui::MainWindow *ui;

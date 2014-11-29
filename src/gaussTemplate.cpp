@@ -34,7 +34,7 @@ void GaussTemplate::retroSubstitutions(){
     double unknown_k;
     double sum;
 
-    unknown_k = coefficients->getValue(numberOfLines,1)/independentTerms->getValue(numberOfLines,numberOfLines);
+    unknown_k = coefficients->getValue(numberOfLines-1,1)/independentTerms->getValue(numberOfLines-1,numberOfLines-1);
 
     for(int k=numberOfLines-2; k>=0; k--){
         sum = 0;
@@ -45,6 +45,7 @@ void GaussTemplate::retroSubstitutions(){
         unknown_k = (coefficients->getValue(k,1) - sum)/independentTerms->getValue(k,k);
         unknowns->setValue(k,1,unknown_k);
     }
+    this->unknownsMatrix = unknowns;
 }
 
 //TODO

@@ -22,19 +22,19 @@ void Gauss::resolveSytem(){
 
     numberOfLines = independentTerms->getHeight();
 
-    for(int k = 0; k<numberOfLines-1; k++){
-        for(int i = k +1; i<numberOfLines;i++){
+    for(int k = 0; k<=numberOfLines-2; k++){
+        for(int i = k +1; i<=numberOfLines-1;i++){
             multiplier = independentTerms->getValue(i,k)/independentTerms->getValue(k,k);
             independentTerms->setValue(i,k,0);
 
             for(int j = k + 1; j<numberOfLines; j++){
                 newValue_aij = independentTerms->getValue(i,j) - multiplier * independentTerms->getValue(k,j);
                 independentTerms->setValue(i,j,newValue_aij);
-
-                newValue_bi = coefficients->getValue(i,1) - multiplier * coefficients->getValue(k,1);
-                coefficients->setValue(i,1,newValue_bi);
-
             }
+
+            newValue_bi = coefficients->getValue(i,1) - multiplier * coefficients->getValue(k,1);
+            coefficients->setValue(i,1,newValue_bi);
+
         }
     }
     retroSubstitutions();

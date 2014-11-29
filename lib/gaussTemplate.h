@@ -15,6 +15,7 @@ public:
 
     Matrix *getUnknownsMatrix();
 
+
     void retroSubstitutions();
     void saveOnList();
 
