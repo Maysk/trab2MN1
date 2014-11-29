@@ -102,6 +102,14 @@ void MainWindow::on_pushButton_clicked()
     ui->labelTimeGauss->setText(QString::number(gauss->getExecutionTime(),'g',12));
     //resolução por Gauss fim
 
+    //Gauss-Jordan
+    GaussJordan *gaussJordan = new GaussJordan(matrixC,matrixD);
+    gaussJordan->resolveSytem();
+    Matrix *resolutionGaussJordan = gaussJordan->getUnknownsMatrix();
+    setTable(resolutionGaussJordan,tableRGaussJordan);
+    setTable(resolutionGaussJordan,tableRGaussJordanComp);
+    //Gauss-jordan FIM
+
     Dialog *dialog = new Dialog(NULL,"Confirmado","Configurações confirmadas");
     dialog->show();
 }
