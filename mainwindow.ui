@@ -34,7 +34,7 @@
          </rect>
         </property>
         <property name="text">
-         <string>Quabtidade de Círculos:</string>
+         <string>Quantidade de Círculos:</string>
         </property>
        </widget>
        <widget class="QSpinBox" name="spinBox_QtdC">
@@ -183,7 +183,7 @@
          </rect>
         </property>
         <property name="text">
-         <string>Tempo(ms):</string>
+         <string>Tempo:</string>
         </property>
        </widget>
        <widget class="QLabel" name="labelTimeGauss">
@@ -432,7 +432,7 @@
          </rect>
         </property>
         <property name="text">
-         <string>Tempo(ms):</string>
+         <string>Tempo:</string>
         </property>
        </widget>
        <widget class="QPlainTextEdit" name="plainTextEditGaussJordan">
@@ -623,7 +623,7 @@
          </rect>
         </property>
         <property name="text">
-         <string>Tempo(ms):</string>
+         <string>Tempo:</string>
         </property>
        </widget>
        <widget class="QLabel" name="labelInterationsGaussComp">
@@ -649,7 +649,7 @@
          </rect>
         </property>
         <property name="text">
-         <string>Tempo(ms):</string>
+         <string>Tempo:</string>
         </property>
        </widget>
        <widget class="QLabel" name="labelInterationsGaussJordanComp">

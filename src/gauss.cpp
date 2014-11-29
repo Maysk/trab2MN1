@@ -1,5 +1,4 @@
 #include "../lib/imports.h"
-
 Gauss::Gauss(Matrix* independentTermsMatrix, Matrix* coefficientMatrix)
     :GaussTemplate(independentTermsMatrix, coefficientMatrix){}
 

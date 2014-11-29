@@ -99,6 +99,7 @@ void MainWindow::on_pushButton_clicked()
     Matrix *resolutionGauss = gauss->getUnknownsMatrix();
     setTable(resolutionGauss,tableRGauss);
     setTable(resolutionGauss,tableRGaussComp);
+    ui->labelTimeGauss->setText(QString::number(gauss->getExecutionTime(),'g',12));
     //resolução por Gauss fim
 
     Dialog *dialog = new Dialog(NULL,"Confirmado","Configurações confirmadas");
