@@ -65,9 +65,9 @@ void GaussTemplate::saveOnList(std::string desc){
 }
 
 
-void GaussTemplate::setExecutionTime(double executionTime){
+void GaussTemplate::setExecutionTime(long double executionTime){
     this->executionTime = executionTime;
 }
-double GaussTemplate::getExecutionTime(){
+long double GaussTemplate::getExecutionTime(){
     return this->executionTime;
 }

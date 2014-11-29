@@ -27,7 +27,8 @@ int main(int argc, char *argv[])
 //    cM->printMatrix();
 //    iTM->printMatrix();
 //    g->getUnknownsMatrix()->printMatrix();
-//    cout << "Tempo: " <<  g->getExecutionTime() <<endl;
+
+//    cout << "Tempo: " << g->getExecutionTime() <<endl;
 //    g->resolveSytem();
 //    g->getUnknownsMatrix()->printMatrix();
 }

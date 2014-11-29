@@ -21,9 +21,11 @@ void Gauss::resolveSytem(){
     double multiplier;
     double newValue_aij;
     double newValue_bi;
-    double executionTime = 0;
-    double start;
-    double end;
+
+    long double executionTimeInSec = 0;
+    clock_t executionTime = 0;
+    clock_t start;
+    clock_t end;
 
     beforeSolve();
 
@@ -57,8 +59,8 @@ void Gauss::resolveSytem(){
     end = clock();
 
     executionTime = executionTime + (end - start);
-    setExecutionTime(executionTime/(double)CLOCKS_PER_SEC);
-
+    executionTimeInSec = executionTime/(long double) CLOCKS_PER_SEC;
+    setExecutionTime(executionTimeInSec);
 
     afterSolve();
 }

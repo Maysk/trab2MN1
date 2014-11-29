@@ -3,7 +3,7 @@ class GaussTemplate {
     Matrix* independentTermsMatrix;
     Matrix* unknownsMatrix;
     ListResults* results;
-    double executionTime;
+    long double executionTime;
 
 public:
 
@@ -18,8 +18,8 @@ public:
 
     Matrix *getUnknownsMatrix();
 
-    void setExecutionTime(double executionTime);
-    double getExecutionTime();
+    void setExecutionTime(long double executionTime);
+    long double getExecutionTime();
 
     void retroSubstitutions();
 
