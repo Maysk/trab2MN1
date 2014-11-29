@@ -94,12 +94,11 @@ void MainWindow::on_pushButton_clicked()
     setMatrixCandD();
 
     //resolução por Gauss
-//    Gauss *gauss = new Gauss(matrixD,matrixC);
-//    gauss->resolveSytem();
-//    Matrix *resolutionGauss = gauss->getUnknownsMatrix();
-//    resolutionGauss->printMatrix();
-//    setTable(resolutionGauss,tableRGauss);
-//    setTable(resolutionGauss,tableRGaussComp);
+    Gauss *gauss = new Gauss(matrixC,matrixD);
+    gauss->resolveSytem();
+    Matrix *resolutionGauss = gauss->getUnknownsMatrix();
+    setTable(resolutionGauss,tableRGauss);
+    setTable(resolutionGauss,tableRGaussComp);
     //resolução por Gauss fim
 
     Dialog *dialog = new Dialog(NULL,"Confirmado","Configurações confirmadas");
