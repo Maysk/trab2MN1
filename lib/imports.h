@@ -11,6 +11,7 @@ using namespace std;
 #include "result.h"
 #include "listResults.h"
 #include "gaussTemplate.h"
+#include "gaussjordan.h"
 #include "gauss.h"
 #include "dialog.h"
 #include "mainwindow.h"

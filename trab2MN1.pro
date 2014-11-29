@@ -17,6 +17,7 @@ SOURCES +=  src/main.cpp\
             src/result.cpp\
             src/listResults.cpp \
             src/gaussTemplate.cpp \
+            src/gaussJordan.cpp \
             src/gauss.cpp \
             src/dialog.cpp \
             src/mainwindow.cpp \
@@ -25,6 +26,7 @@ HEADERS  += lib/imports.h \
             lib/matrix.h \
             lib/result.h\
             lib/listResults.h \
+            lib/gaussjordan.h \
             lib/gaussTemplate.h \
             lib/gauss.h \
             lib/dialog.h \

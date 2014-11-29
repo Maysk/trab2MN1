@@ -17,7 +17,6 @@ Matrix *GaussTemplate::getCoefficienMatrix(){
     return this->coefficientMatrix;
 }
 
-
 void GaussTemplate::setIndependentTerms(Matrix* matrix){
     this->independentTermsMatrix = matrix;
 }
@@ -28,6 +27,28 @@ Matrix *GaussTemplate::getIndependentTerms(){
 Matrix *GaussTemplate::getUnknownsMatrix(){
     return this->unknownsMatrix;
 }
+
+void GaussTemplate::beforeSolve(){
+    Matrix* copy1 = getIndependentTerms()->getCopy();
+    Matrix* copy2 = getCoefficienMatrix()->getCopy();
+    this->independentTermsMatrixTemp = getIndependentTerms();
+    this->coefficientMatrixTemp = getCoefficienMatrix();
+    setIndependentTerms(copy1);
+    setCoefficienMatrix(copy2);
+
+    setExecutionTime(0);
+    resetList();
+
+}
+
+
+void GaussTemplate::afterSolve(){
+    delete getIndependentTerms();
+    delete getCoefficienMatrix();
+    setIndependentTerms(this->independentTermsMatrixTemp);
+    setCoefficienMatrix(this->coefficientMatrixTemp);
+}
+
 
 
 void GaussTemplate::retroSubstitutions(){
@@ -53,7 +74,7 @@ void GaussTemplate::retroSubstitutions(){
     this->unknownsMatrix = unknowns;
 }
 
-//TODO
+
 void GaussTemplate::resetList(){
     delete results;
     this->results = new ListResults();

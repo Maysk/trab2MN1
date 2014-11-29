@@ -2,19 +2,6 @@
 Gauss::Gauss(Matrix* independentTermsMatrix, Matrix* coefficientMatrix)
     :GaussTemplate(independentTermsMatrix, coefficientMatrix){}
 
-void Gauss::beforeSolve(){
-    Matrix* copy1 = getIndependentTerms()->getCopy();
-    Matrix* copy2 = getCoefficienMatrix()->getCopy();
-    this->independentTermsMatrixTemp = getIndependentTerms();
-    this->coefficientMatrixTemp = getCoefficienMatrix();
-    setIndependentTerms(copy1);
-    setCoefficienMatrix(copy2);
-
-    setExecutionTime(0);
-    resetList();
-
-}
-
 void Gauss::resolveSytem(){
     int numberOfLines;
     double multiplier;
@@ -64,9 +51,4 @@ void Gauss::resolveSytem(){
     afterSolve();
 }
 
-void Gauss::afterSolve(){
-    delete getIndependentTerms();
-    delete getCoefficienMatrix();
-    setIndependentTerms(this->independentTermsMatrixTemp);
-    setCoefficienMatrix(this->coefficientMatrixTemp);
-}
+

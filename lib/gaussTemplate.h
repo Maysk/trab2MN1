@@ -5,6 +5,10 @@ class GaussTemplate {
     ListResults* results;
     long double executionTime;
 
+    //Atributos que nao possuem getter or setters.
+    Matrix* coefficientMatrixTemp;
+    Matrix* independentTermsMatrixTemp;
+
 public:
 
     GaussTemplate(Matrix* independentTermsMatrix, Matrix* coefficientMatrix);
@@ -26,9 +30,10 @@ public:
     void resetList();
     void saveOnList(std::string desc);
 
-    virtual void beforeSolve() = 0;
+    void beforeSolve();
+    void afterSolve();
+
     virtual void resolveSytem() = 0;
-    virtual void afterSolve() = 0;
 
 
 };
