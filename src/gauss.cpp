@@ -4,7 +4,7 @@ Gauss::Gauss(Matrix* independentTermsMatrix, Matrix* coefficientMatrix)
     :GaussTemplate(independentTermsMatrix, coefficientMatrix){}
 
 void Gauss::beforeSolve(){
-
+    resetList();
     this->independentTermsMatrixTemp = getIndependentTerms()->getCopy();
     this->coefficientMatrixTemp = getCoefficienMatrix()->getCopy();
 }
@@ -16,6 +16,7 @@ void Gauss::resolveSytem(){
     double newValue_bi;
 
 
+
     beforeSolve();
 
     Matrix* coefficients = getCoefficienMatrix();
@@ -24,6 +25,8 @@ void Gauss::resolveSytem(){
     numberOfLines = independentTerms->getHeight();
 
     for(int k = 0; k<=numberOfLines-2; k++){
+        saveOnList("Operação realizada nesse ponto");
+
         for(int i = k +1; i<=numberOfLines-1;i++){
             multiplier = independentTerms->getValue(i,k)/independentTerms->getValue(k,k);
             independentTerms->setValue(i,k,0);

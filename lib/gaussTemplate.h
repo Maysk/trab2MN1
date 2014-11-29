@@ -2,7 +2,7 @@ class GaussTemplate {
     Matrix* coefficientMatrix;
     Matrix* independentTermsMatrix;
     Matrix* unknownsMatrix;
-
+    ListResults* results;
 public:
 
     GaussTemplate(Matrix* independentTermsMatrix, Matrix* coefficientMatrix);
@@ -17,9 +17,10 @@ public:
 
     Matrix *getUnknownsMatrix();
 
-
     void retroSubstitutions();
-    void saveOnList();
+
+    void resetList();
+    void saveOnList(std::string desc);
 
     virtual void beforeSolve() = 0;
     virtual void resolveSytem() = 0;

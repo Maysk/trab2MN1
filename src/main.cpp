@@ -4,14 +4,14 @@
 
 int main(int argc, char *argv[])
 {
-
+/*
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
 
     return a.exec();
+*/
 
-/*
     Matrix *iTM = new Matrix(3,3);
     Matrix *cM = new Matrix (3,1);
 
@@ -29,5 +29,5 @@ int main(int argc, char *argv[])
     Gauss* g = new Gauss(iTM, cM);
 
     g->resolveSytem();
-    g->getUnknownsMatrix()->printMatrix();*/
+    g->getUnknownsMatrix()->printMatrix();
  }

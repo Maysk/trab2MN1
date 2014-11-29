@@ -4,6 +4,7 @@
 GaussTemplate::GaussTemplate(Matrix* independentTermsMatrix, Matrix* coefficientMatrix){
     this->independentTermsMatrix = independentTermsMatrix;
     this->coefficientMatrix = coefficientMatrix;
+    this->results = new ListResults();
 }
 
 void GaussTemplate::setCoefficienMatrix(Matrix* matrix){
@@ -51,5 +52,13 @@ void GaussTemplate::retroSubstitutions(){
 }
 
 //TODO
-void GaussTemplate::saveOnList(){}
+void GaussTemplate::resetList(){
+    delete results;
+    this->results = new ListResults();
+}
+
+void GaussTemplate::saveOnList(std::string desc){
+    Result* parcialResult = new Result(getIndependentTerms()->getCopy(), getCoefficienMatrix()->getCopy(), desc);
+    results->push(parcialResult);
+}
 
