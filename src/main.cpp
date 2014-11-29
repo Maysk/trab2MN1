@@ -29,8 +29,5 @@ int main(int argc, char *argv[])
     Gauss* g = new Gauss(iTM, cM);
 
     g->resolveSytem();
-
-    cM->printMatrix();
-    iTM->printMatrix();*/
-
+    g->getUnknownsMatrix()->printMatrix();*/
  }

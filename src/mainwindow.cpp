@@ -38,7 +38,7 @@ MainWindow::MainWindow(QWidget *parent) :
     setDimensionNx1( valN,tableAreaGaussJordanComp);
 
     //Teste de desenho:
-    double raiosTeste[5] = {1,2,3,4,5};
+    double raiosTeste[5] = {1,1,2,2,4};
     this->desenhar(5,raiosTeste);
     //Fim do teste de desenho
 
@@ -193,12 +193,11 @@ void MainWindow::desenhar(int n, double raios[]){ //extends PoG_DESIGN_PATTERN
 
     double areas[n];
     for(int j = 0; j<n;j++){
-        areas[j] = 3.141592*raios[j]*raios[j];
+        areas[j] = M_PI*raios[j]*raios[j];
     }
 
-    //IDEIA: FAZER QUADRADO EM CIMA DE QUADRADO
 
-    double tamanhoMaxArea = 3.141592*(tamanhoMaxRaio/2)*(tamanhoMaxRaio/2);
+    double tamanhoMaxArea = M_PI*(tamanhoMaxRaio/2)*(tamanhoMaxRaio/2);
     //Início da normalização das áreas:
 
     double maiorArea = areas[0];
@@ -211,7 +210,7 @@ void MainWindow::desenhar(int n, double raios[]){ //extends PoG_DESIGN_PATTERN
     //Parte da regra de 3:
     for (int i =0;i<n;i++){
         areas[i] = (tamanhoMaxArea*areas[i])/maiorArea;
-        cout<<"Area "<<i+1<<"= "<<areas[i]<<endl;
+        //cout<<"Area "<<i+1<<"= "<<areas[i]<<endl;
     }
 
     //Fim da normalização
@@ -221,20 +220,12 @@ void MainWindow::desenhar(int n, double raios[]){ //extends PoG_DESIGN_PATTERN
     for (int i = 0;i<n;i++){
         QColor corAleatoria(rand()%255,rand()%255,rand()%255);
         corQuadrado[i].setColor(corAleatoria);
-
-
     }
 
     //Adicionar traço definindo a escala
 
-
-
-
-
-
     int xEscala = borda;
     int yEscala = 2*borda+tamanhoMaxRaio;
-
 
 
     QGraphicsLineItem *escala = new QGraphicsLineItem(xEscala,yEscala,(tamanhoMaxRaio/2)+borda,yEscala);
@@ -280,13 +271,17 @@ void MainWindow::desenhar(int n, double raios[]){ //extends PoG_DESIGN_PATTERN
         }
       }
 
-    for (int i =0;i<n;i++){
-        cout<<"Area: "<<areas[i]<<" Indice: "<<indices[i]<<endl;
-
-    }
-
-
     //Fim da ordenação
+
+    //Vetor de booleanos que auxiliarão no print da área da legenda
+    bool legendado[n];
+    for(int i = 0; i<n;i++){
+        legendado[i] = false;
+    }
+    int contRepeticoes;
+
+
+
 
 
     //LAÇO PRINCIPAL:
@@ -303,22 +298,44 @@ void MainWindow::desenhar(int n, double raios[]){ //extends PoG_DESIGN_PATTERN
         cena->addItem(circulo);
 
         //Mostrar quadradinhos com cores:
-        //QBrush corQuadrado(corAleatoria);
-        QGraphicsRectItem *legendaItem = new QGraphicsRectItem(xLegendaItem,yLegendaItem,15,15);
-        legendaItem->setBrush(corQuadrado[i].color());
+        if(legendado[i] == false){
+            legendado[i] = true;
+            contRepeticoes = 0;
+            QGraphicsRectItem *legendaItem = new QGraphicsRectItem(xLegendaItem,yLegendaItem,15,15);
+            legendaItem->setBrush(corQuadrado[i].color());
 
-        cena->addItem(legendaItem);
+            cena->addItem(legendaItem);
 
-        QString textRaio("r");
-        textRaio.append(QString::number(i+1));
-        QGraphicsTextItem *textoLegendaItem = new QGraphicsTextItem(textRaio);
-        textoLegendaItem->setX(xLegendaItem+20);
-        textoLegendaItem->setY(yLegendaItem-3);
-        textoLegendaItem->setFont(fonteLegenda);
 
-        cena->addItem(textoLegendaItem);
-        yLegendaItem = yLegendaItem + 25;
 
+            QString textRaio("r");
+            textRaio.append(QString::number(i+1));
+            QGraphicsTextItem *textoLegendaItem = new QGraphicsTextItem(textRaio);
+            textoLegendaItem->setX(xLegendaItem+20);
+            textoLegendaItem->setY(yLegendaItem-3);
+            textoLegendaItem->setFont(fonteLegenda);
+            cena->addItem(textoLegendaItem);
+
+            for(int k = i+1;k<n;k++){
+                if(raios[i]==raios[k]){
+                    contRepeticoes++;
+                    corQuadrado[k].setColor(corQuadrado[i].color());
+                    legendado[k] = true;
+                    QString textRaio("r");
+                    textRaio.append(QString::number(k+1));
+                    QGraphicsTextItem *textoLegendaItem = new QGraphicsTextItem(textRaio);
+                    textoLegendaItem->setX(xLegendaItem+20+(contRepeticoes*20));
+                    textoLegendaItem->setY(yLegendaItem-3);
+                    textoLegenda->setFont(fonteLegenda);
+                    cena->addItem(textoLegendaItem);
+
+                }
+
+            }
+
+
+            yLegendaItem = yLegendaItem + 25;
+        }
 
         //COMEÇO DO DESENHO DAS AREAS
 

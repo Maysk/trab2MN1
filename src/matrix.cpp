@@ -44,6 +44,18 @@ int Matrix::getWidth(){
     return this->width;
 }
 
+
+Matrix* Matrix::getCopy(){
+    Matrix* copy = new Matrix(this->getHeight(),this->getWidth());
+
+    for(int i = 0; i<this->getHeight();i++){
+        for(int j = 0; j<this->getWidth();j++){
+            copy->setValue(i,j,this->getValue(i,j));
+        }
+    }
+    return copy;
+}
+
 void Matrix::printMatrix(){
     for(int i = 0 ; i < getHeight() ; i++){
         for(int j = 0 ; j < getWidth() ; j++)

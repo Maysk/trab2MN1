@@ -16,6 +16,7 @@ public:
     int getHeight();
     int getWidth();
 
+    Matrix* getCopy();
     void printMatrix();
 
 };

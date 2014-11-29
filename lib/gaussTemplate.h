@@ -7,11 +7,13 @@ public:
 
     GaussTemplate(Matrix* independentTermsMatrix, Matrix* coefficientMatrix);
 
-    void setCoefficienMatrix(Matrix *matrix);
+    void setCoefficienMatrix(Matrix* matrix);
     Matrix *getCoefficienMatrix();
+
 
     void setIndependentTerms(Matrix* matrix);
     Matrix *getIndependentTerms();
+
 
     Matrix *getUnknownsMatrix();
 

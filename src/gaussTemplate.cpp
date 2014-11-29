@@ -6,12 +6,14 @@ GaussTemplate::GaussTemplate(Matrix* independentTermsMatrix, Matrix* coefficient
     this->coefficientMatrix = coefficientMatrix;
 }
 
-void GaussTemplate::setCoefficienMatrix(Matrix *matrix){
+void GaussTemplate::setCoefficienMatrix(Matrix* matrix){
     this->coefficientMatrix = matrix;
 }
+
 Matrix *GaussTemplate::getCoefficienMatrix(){
     return this->coefficientMatrix;
 }
+
 
 void GaussTemplate::setIndependentTerms(Matrix* matrix){
     this->independentTermsMatrix = matrix;
@@ -24,7 +26,7 @@ Matrix *GaussTemplate::getUnknownsMatrix(){
     return this->unknownsMatrix;
 }
 
-//TODO
+
 void GaussTemplate::retroSubstitutions(){
     Matrix *independentTerms = getIndependentTerms();
     Matrix *coefficients = getCoefficienMatrix();
@@ -34,16 +36,16 @@ void GaussTemplate::retroSubstitutions(){
     double unknown_k;
     double sum;
 
-    unknown_k = coefficients->getValue(numberOfLines-1,1)/independentTerms->getValue(numberOfLines-1,numberOfLines-1);
-
+    unknown_k = coefficients->getValue(numberOfLines-1,0)/independentTerms->getValue(numberOfLines-1,numberOfLines-1);
+    unknowns->setValue(2,0,unknown_k);
     for(int k=numberOfLines-2; k>=0; k--){
         sum = 0;
         for (int j=(k + 1); j <= numberOfLines-1; j++){
-            sum = sum + independentTerms->getValue(k,j) * unknowns->getValue(j,1);
+            sum = sum + independentTerms->getValue(k,j) * unknowns->getValue(j,0);
         }
 
-        unknown_k = (coefficients->getValue(k,1) - sum)/independentTerms->getValue(k,k);
-        unknowns->setValue(k,1,unknown_k);
+        unknown_k = (coefficients->getValue(k,0) - sum)/independentTerms->getValue(k,k);
+        unknowns->setValue(k,0,unknown_k);
     }
     this->unknownsMatrix = unknowns;
 }

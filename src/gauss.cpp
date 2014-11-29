@@ -4,8 +4,9 @@ Gauss::Gauss(Matrix* independentTermsMatrix, Matrix* coefficientMatrix)
     :GaussTemplate(independentTermsMatrix, coefficientMatrix){}
 
 void Gauss::beforeSolve(){
-    this->independentTermsMatrixTemp = getIndependentTerms();
-    this->coefficientMatrixTemp = getCoefficienMatrix();
+
+    this->independentTermsMatrixTemp = getIndependentTerms()->getCopy();
+    this->coefficientMatrixTemp = getCoefficienMatrix()->getCopy();
 }
 
 void Gauss::resolveSytem(){
@@ -17,8 +18,8 @@ void Gauss::resolveSytem(){
 
     beforeSolve();
 
-    Matrix *independentTerms = getIndependentTerms();
-    Matrix *coefficients = getCoefficienMatrix();
+    Matrix* coefficients = getCoefficienMatrix();
+    Matrix* independentTerms = getIndependentTerms();
 
     numberOfLines = independentTerms->getHeight();
 
@@ -32,8 +33,8 @@ void Gauss::resolveSytem(){
                 independentTerms->setValue(i,j,newValue_aij);
             }
 
-            newValue_bi = coefficients->getValue(i,1) - multiplier * coefficients->getValue(k,1);
-            coefficients->setValue(i,1,newValue_bi);
+            newValue_bi = coefficients->getValue(i,0) - multiplier * coefficients->getValue(k,0);
+            coefficients->setValue(i,0,newValue_bi);
 
         }
     }
@@ -43,6 +44,8 @@ void Gauss::resolveSytem(){
 }
 
 void Gauss::afterSolve(){
-    setIndependentTerms(independentTermsMatrixTemp);
-    setCoefficienMatrix(coefficientMatrixTemp);
+    //delete getIndependentTerms();
+    //delete getCoefficienMatrix();
+    setIndependentTerms(this->independentTermsMatrixTemp);
+    setCoefficienMatrix(this->coefficientMatrixTemp);
 }

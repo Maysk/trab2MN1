@@ -16,7 +16,7 @@ public:
 
     bool isEmpty();
 
-    void push(Result *result);
+    void push(Result* result);
 
     Result *pop();
 
