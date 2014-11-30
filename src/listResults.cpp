@@ -82,6 +82,6 @@ std::string ListResults::toString(){
         saida.append("\n");
     }
 
-    cout<<saida<<endl;
+//    cout<<saida<<endl;
     return saida;
 }

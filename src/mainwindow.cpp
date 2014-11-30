@@ -37,12 +37,6 @@ MainWindow::MainWindow(QWidget *parent) :
     setDimensionNx1( valN,tableRGaussJordanComp);
     setDimensionNx1( valN,tableAreaGaussJordanComp);
 
-    //Teste de desenho:
-//    double raiosTeste[5] = {1,1,2,2,4};
-//    this->desenhar(5,raiosTeste);
-    //Fim do teste de desenho
-
-
     setMatrixCandD();
 }
 
@@ -104,6 +98,10 @@ void MainWindow::setResultMethod(GaussTemplate *method, int type){
 
     bool pivoteamento;
 
+    QString sTime;
+    QString sInterations;
+    QString sError;
+
     switch(type){
     case 0:
         time = ui->labelTimeGauss;
@@ -139,20 +137,41 @@ void MainWindow::setResultMethod(GaussTemplate *method, int type){
         break;
     }
     method->resolveSytem(pivoteamento);
-    raios = method->getUnknownsMatrix();
+    if(method->isSolvable()){
+        raios = method->getUnknownsMatrix();
 
-    area = new Area(raios);
-    areas = area->getArea();
+        area = new Area(raios);
+        areas = area->getArea();
+
+        sError = QString::number(method->getError(),'g',12);
+
+    }
+    else{
+        raios = new Matrix(matrixC->getHeight(),matrixD->getWidth());
+        areas = new Matrix(matrixC->getHeight(),matrixD->getWidth());
+        sError = QString("Nao foi possivel calcular os raios utilizando o metodo escolhido");
+    }
+    sTime = QString::number(method->getExecutionTime(),'g',12);
+    sInterations = QString::number(method->getResults()->getLength(),'g',12);
 
     setTable(raios,tableRaio);
     setTable(areas,tableArea);
 
-
-    time->setText(QString::number(method->getExecutionTime(),'g',12));
-    interations->setText(QString::number(method->getExecutionTime(),'g',12));
-    error->setText(QString::number(method->getError(),'g',12));
-
-    //TODO: colocar erro e iterações
+    time->setText(sTime);
+    interations->setText(sInterations);
+    error->setText(sError);
+    if(type < 2){
+        QPlainTextEdit *passo;
+        switch(type){
+        case 0:
+                passo = ui->plainTextEditGauss;
+            break;
+        case 1:
+            passo = ui->plainTextEditGaussJordan;
+            break;
+        }
+        passo->setPlainText(QString::fromStdString(method->getResults()->toString()));
+    }
 }
 
 void MainWindow::on_pushButton_clicked()
@@ -162,7 +181,10 @@ void MainWindow::on_pushButton_clicked()
     //resolução por Gauss
     Gauss *gauss = new Gauss(matrixC,matrixD);
     setResultMethod(gauss,0);
-    desenhar(spinBox_QtdC->value() ,gauss->getUnknownsMatrix());
+    if(gauss->isSolvable())
+        desenhar(spinBox_QtdC->value() ,gauss->getUnknownsMatrix());
+    else
+        ui->graphicsView->setScene(NULL);
     setResultMethod(gauss,2);
     //resolução por Gauss fim
 
@@ -198,7 +220,6 @@ void MainWindow::setMatrixCandD(){
     }
 }
 
-//TODO:passo a passo e labels
 void MainWindow::setTable(Matrix *matrix, QTableWidget *table){
     double lines = matrix->getHeight();
     double collumns = matrix->getWidth();
@@ -210,6 +231,59 @@ void MainWindow::setTable(Matrix *matrix, QTableWidget *table){
     }
 
 }
+
+
+
+void MainWindow::on_radioButtonGauss_toggled(bool checked)
+{
+    Gauss *gauss = new Gauss(matrixC,matrixD);
+    setResultMethod(gauss,0);
+    if(gauss->isSolvable())
+        desenhar(spinBox_QtdC->value() ,gauss->getUnknownsMatrix());
+    else
+        ui->graphicsView->setScene(NULL);
+    showMessage(checked);
+
+//    delete gauss;
+}
+
+void MainWindow::on_radioButtonGaussJordan_toggled(bool checked)
+{
+    GaussJordan *gaussJordan = new GaussJordan(matrixC,matrixD);
+    setResultMethod(gaussJordan,1);
+
+    showMessage(checked);
+
+//    delete gaussJordan;
+}
+
+void MainWindow::on_radioButtonComp_toggled(bool checked)
+{
+    Gauss *gauss = new Gauss(matrixC,matrixD);
+    setResultMethod(gauss,2);
+
+    GaussJordan *gaussJordan = new GaussJordan(matrixC,matrixD);
+    setResultMethod(gaussJordan,3);
+
+    showMessage(checked);
+
+//    delete gauss;
+//    delete gaussJordan;
+}
+
+void MainWindow::showMessage(bool cheked){
+    if(cheked){
+        Dialog *dialog = new Dialog(NULL,"Confirmado","Pivoteamento ativado");
+        dialog->show();
+    }
+    else{
+        Dialog *dialog = new Dialog(NULL,"Confirmado","Pivoteamento desativado");
+        dialog->show();
+    }
+}
+
+
+//Lucas esteve aqui
 
 //Desenhar as circunferencias:
 void MainWindow::desenhar(int n, Matrix* raiosM){ //extends PoG_DESIGN_PATTERN
@@ -223,16 +297,28 @@ void MainWindow::desenhar(int n, Matrix* raiosM){ //extends PoG_DESIGN_PATTERN
 
     //Conversão de Matrix* para raios[]:
     double raios[n];
+    bool achouPositivo = false;
 
     for(int i = 0; i < n; i++){
         raios[i] = raiosM->getValue(i,0);
-        if (raios[i] != raios[i]){ //Teste se é nan
-            QGraphicsTextItem *textoErro = new QGraphicsTextItem("Erro!\nSistema de equações provavelmente sem solução.\n");
-            textoErro->setX(20);
-            textoErro->setY(20);
+        if (raios[i] < 0){ //Teste se há um raio negativo
+            QGraphicsTextItem *textoErro = new QGraphicsTextItem("Erro!\nPelo menos um dos raios descoberto pelos métodos é negativo.\n");
+            textoErro->setX(50);
+            textoErro->setY(50);
             cena->addItem(textoErro);
             return;
         }
+        if (raios[i] > 0){
+            achouPositivo = true;
+        }
+
+    }
+    if (!achouPositivo){
+        QGraphicsTextItem *textoErro = new QGraphicsTextItem("Erro!\nTodos os raios descobertos são iguais a 0.\n");
+        textoErro->setX(50);
+        textoErro->setY(50);
+        cena->addItem(textoErro);
+        return;
     }
 
     //Fim da conversão, Aleluia irmãos.
@@ -442,47 +528,4 @@ void MainWindow::desenhar(int n, Matrix* raiosM){ //extends PoG_DESIGN_PATTERN
 
 }
 
-void MainWindow::on_radioButtonGauss_toggled(bool checked)
-{
-    Gauss *gauss = new Gauss(matrixC,matrixD);
-    setResultMethod(gauss,0);
-    desenhar(spinBox_QtdC->value() ,gauss->getUnknownsMatrix());
-    showMessage(checked);
 
-//    delete gauss;
-}
-
-void MainWindow::on_radioButtonGaussJordan_toggled(bool checked)
-{
-    GaussJordan *gaussJordan = new GaussJordan(matrixC,matrixD);
-    setResultMethod(gaussJordan,1);
-
-    showMessage(checked);
-
-//    delete gaussJordan;
-}
-
-void MainWindow::on_radioButtonComp_toggled(bool checked)
-{
-    Gauss *gauss = new Gauss(matrixC,matrixD);
-    setResultMethod(gauss,2);
-
-    GaussJordan *gaussJordan = new GaussJordan(matrixC,matrixD);
-    setResultMethod(gaussJordan,3);
-
-    showMessage(checked);
-
-//    delete gauss;
-//    delete gaussJordan;
-}
-
-void MainWindow::showMessage(bool cheked){
-    if(cheked){
-        Dialog *dialog = new Dialog(NULL,"Confirmado","Pivoteamento ativado");
-        dialog->show();
-    }
-    else{
-        Dialog *dialog = new Dialog(NULL,"Confirmado","Pivoteamento desativado");
-        dialog->show();
-    }
-}
