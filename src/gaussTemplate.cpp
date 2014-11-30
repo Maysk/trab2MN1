@@ -139,17 +139,6 @@ double GaussTemplate::getError(){
     Matrix *x = unknownsMatrix->getCopy();
     Matrix *CX = independentTermsMatrix->multipy(x);
     Matrix *residuo = coefficientMatrix->subtraction(CX);
-//    residuo->printMatrix();
-    cout << "coeficiente:\n";
-    coefficientMatrix->printMatrix();
-    cout << "independentes:\n";
-    independentTermsMatrix->printMatrix();
-    cout << "X:\n";
-    x->printMatrix();
-    cout << "CX:\n";
-    CX->printMatrix();
-    cout << "residuo\n";
-    residuo->printMatrix();
     double maior = 0;
     for(int i = 0; i < residuo->getHeight(); i++)
         for(int j = 0; j < residuo->getWidth(); j++)
