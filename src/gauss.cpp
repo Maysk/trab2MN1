@@ -21,7 +21,7 @@ void Gauss::resolveSytem( bool usePivot ){
     Matrix* independentTerms = getIndependentTerms();
     numberOfLines = independentTerms->getHeight();
 
-    saveOnList("SistemaInicial: \n");
+    saveOnList("Sistema Inicial: \n");
 
 
     try{
@@ -70,7 +70,7 @@ void Gauss::resolveSytem( bool usePivot ){
     }
 
     catch(int e){
-        saveOnList("Nao foi possivel continuar pois o pivô atual é igual a zero.");
+        saveOnList("Nao foi possivel continuar pois o pivô atual é igual a zero.\n");
         setSolvable(false);
     }
 
