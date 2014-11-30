@@ -38,8 +38,8 @@ MainWindow::MainWindow(QWidget *parent) :
     setDimensionNx1( valN,tableAreaGaussJordanComp);
 
     //Teste de desenho:
-    double raiosTeste[5] = {1,1,2,2,4};
-    this->desenhar(5,raiosTeste);
+//    double raiosTeste[5] = {1,1,2,2,4};
+//    this->desenhar(5,raiosTeste);
     //Fim do teste de desenho
 
 
@@ -138,7 +138,7 @@ void MainWindow::setResultMethod(GaussTemplate *method, int type){
         pivoteamento = ui->radioButtonComp->isChecked();
         break;
     }
-    method->resolveSytem();
+    method->resolveSytem(pivoteamento);
     raios = method->getUnknownsMatrix();
 
     area = new Area(raios);
@@ -162,6 +162,7 @@ void MainWindow::on_pushButton_clicked()
     //resolução por Gauss
     Gauss *gauss = new Gauss(matrixC,matrixD);
     setResultMethod(gauss,0);
+    desenhar(spinBox_QtdC->value() ,gauss->getUnknownsMatrix());
     setResultMethod(gauss,2);
     //resolução por Gauss fim
 
@@ -211,15 +212,30 @@ void MainWindow::setTable(Matrix *matrix, QTableWidget *table){
 }
 
 //Desenhar as circunferencias:
-void MainWindow::desenhar(int n, double raios[]){ //extends PoG_DESIGN_PATTERN
+void MainWindow::desenhar(int n, Matrix* raiosM){ //extends PoG_DESIGN_PATTERN
 
-    //Função que vai desenhar os circulos e embaixo linhas com raios
+    //Função que vai desenhar os circulos e embaixo linhas com raios/áreas
     QGraphicsView *tela = ui->graphicsView;
     int largura = ui->graphicsView->width();
     int altura = ui->graphicsView->height();
     QGraphicsScene *cena = new QGraphicsScene(0,0,largura-40,altura+150);
     tela->setScene(cena);
 
+    //Conversão de Matrix* para raios[]:
+    double raios[n];
+
+    for(int i = 0; i < n; i++){
+        raios[i] = raiosM->getValue(i,0);
+        if (raios[i] != raios[i]){ //Teste se é nan
+            QGraphicsTextItem *textoErro = new QGraphicsTextItem("Erro!\nSistema de equações provavelmente sem solução.\n");
+            textoErro->setX(20);
+            textoErro->setY(20);
+            cena->addItem(textoErro);
+            return;
+        }
+    }
+
+    //Fim da conversão, Aleluia irmãos.
 
     int borda = 20;
 
@@ -430,7 +446,7 @@ void MainWindow::on_radioButtonGauss_toggled(bool checked)
 {
     Gauss *gauss = new Gauss(matrixC,matrixD);
     setResultMethod(gauss,0);
-
+    desenhar(spinBox_QtdC->value() ,gauss->getUnknownsMatrix());
     showMessage(checked);
 
 //    delete gauss;

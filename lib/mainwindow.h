@@ -34,7 +34,7 @@ private slots:
 
     void setResultMethod(GaussTemplate *method,int type); //Type: 0 = Gauss; 1 = Gauss-Jordan; 2 = GaussComp; 3 = Gauss-JordanComp
 
-    void desenhar(int n, double raios[]);
+    void desenhar(int, Matrix*);
 
     void on_radioButtonGauss_toggled(bool checked);
 
