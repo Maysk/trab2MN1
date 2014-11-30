@@ -18,6 +18,7 @@ public:
 
     Matrix* getCopy();
     void printMatrix();
+    std::string toString();
 
     Matrix* multipy(Matrix *m);
     Matrix* subtraction(Matrix *m);

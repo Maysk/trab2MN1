@@ -55,3 +55,33 @@ Result* ListResults::pop(){
 int ListResults::getLength(){
     return this->lenght;
 }
+
+
+std::string ListResults::toString(){
+
+    int numeroPassos = this->getLength();
+
+    Result* noAtual;
+    ListResults copiaResults = *this;
+
+    string saida = "";
+    saida.append("Passo a Passo da resolução do Sistema:\n");
+    noAtual = copiaResults.pop();
+    saida.append(noAtual->getDescription());
+    saida.append(noAtual->getCoefficienMatrix()->toString()+"\n");
+    saida.append(noAtual->getIndependentTerms()->toString());
+    saida.append("\n");
+
+    numeroPassos--;
+
+    for (int i = 0; i < numeroPassos; i++){
+        noAtual = copiaResults.pop();
+        saida.append(noAtual->getDescription());
+        saida.append("Matriz dos Coeficientes:\n" + noAtual->getCoefficienMatrix()->toString());
+        saida.append("Matriz dos Termos Independentes:\n" + noAtual->getIndependentTerms()->toString());
+        saida.append("\n");
+    }
+
+    cout<<saida<<endl;
+    return saida;
+}

@@ -21,4 +21,6 @@ public:
     Result *pop();
 
     int getLength();
+
+    std::string toString();
 };

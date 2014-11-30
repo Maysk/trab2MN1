@@ -86,3 +86,25 @@ Matrix* Matrix::subtraction(Matrix *m){
     }
     return  result;
 }
+
+std::string Matrix::toString(){
+
+    int w = this->getWidth();
+    int h = this->getHeight();
+
+    QString  coef="";
+
+
+    for (int i = 0; i < h;i++){
+
+        coef.append("L"+QString::number(i)+": ");
+
+        for(int j = 0; j < w;j++){
+            coef.append(QString::number(this->getValue(i,j)));
+            coef.append(" ");
+        }
+        coef.append("\n");
+    }
+
+    return coef.toStdString();
+}
