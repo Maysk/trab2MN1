@@ -176,6 +176,8 @@ void MainWindow::on_pushButton_clicked()
     setResultMethod(gauss,0);
     if(gauss->isSolvable())
         desenhar(spinBox_QtdC->value() ,gauss->getUnknownsMatrix());
+    else
+        ui->graphicsView->setScene(NULL);
     setResultMethod(gauss,2);
     //resolução por Gauss fim
 
@@ -236,16 +238,28 @@ void MainWindow::desenhar(int n, Matrix* raiosM){ //extends PoG_DESIGN_PATTERN
 
     //Conversão de Matrix* para raios[]:
     double raios[n];
+    bool achouPositivo = false;
 
     for(int i = 0; i < n; i++){
         raios[i] = raiosM->getValue(i,0);
-        if (raios[i] != raios[i]){ //Teste se é nan
-            QGraphicsTextItem *textoErro = new QGraphicsTextItem("Erro!\nSistema de equações provavelmente sem solução.\n");
-            textoErro->setX(20);
-            textoErro->setY(20);
+        if (raios[i] < 0){ //Teste se há um raio negativo
+            QGraphicsTextItem *textoErro = new QGraphicsTextItem("Erro!\nPelo menos um dos raios descoberto pelos métodos é negativo.\n");
+            textoErro->setX(50);
+            textoErro->setY(50);
             cena->addItem(textoErro);
             return;
         }
+        if (raios[i] > 0){
+            achouPositivo = true;
+        }
+
+    }
+    if (!achouPositivo){
+        QGraphicsTextItem *textoErro = new QGraphicsTextItem("Erro!\nTodos os raios descobertos são iguais a 0.\n");
+        textoErro->setX(50);
+        textoErro->setY(50);
+        cena->addItem(textoErro);
+        return;
     }
 
     //Fim da conversão, Aleluia irmãos.
@@ -459,7 +473,10 @@ void MainWindow::on_radioButtonGauss_toggled(bool checked)
 {
     Gauss *gauss = new Gauss(matrixC,matrixD);
     setResultMethod(gauss,0);
-    desenhar(spinBox_QtdC->value() ,gauss->getUnknownsMatrix());
+    if(gauss->isSolvable())
+        desenhar(spinBox_QtdC->value() ,gauss->getUnknownsMatrix());
+    else
+        ui->graphicsView->setScene(NULL);
     showMessage(checked);
 
 //    delete gauss;
