@@ -12,19 +12,20 @@ void Gauss::resolveSytem(){
     clock_t executionTime = 0;
     clock_t start;
     clock_t end;
+    std::ostringstream description;
 
     beforeSolve();
-
 
     Matrix* coefficients = getCoefficienMatrix();
     Matrix* independentTerms = getIndependentTerms();
     numberOfLines = independentTerms->getHeight();
 
+    saveOnList("SistemaInicial: ");
 
     for(int k = 0; k<=numberOfLines-2; k++){
-        saveOnList("Operação realizada nesse ponto");
-        start = clock();
         for(int i = k +1; i<=numberOfLines-1;i++){
+            start = clock();
+
             multiplier = independentTerms->getValue(i,k)/independentTerms->getValue(k,k);
             independentTerms->setValue(i,k,0);
 
@@ -35,9 +36,15 @@ void Gauss::resolveSytem(){
 
             newValue_bi = coefficients->getValue(i,0) - multiplier * coefficients->getValue(k,0);
             coefficients->setValue(i,0,newValue_bi);
+            end = clock();
+            executionTime = executionTime + (end - start);
+
+           description<<"Operação realizada: L"<< i <<" <- L"<< i <<" - ("<< multiplier <<") * L"<< k;
+
+            saveOnList(description.str());
+            description.clear();
+
         }
-        end = clock();
-        executionTime = executionTime + (end - start);
     }
 
     start = clock();

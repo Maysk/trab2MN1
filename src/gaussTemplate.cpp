@@ -9,6 +9,7 @@ GaussTemplate::GaussTemplate(Matrix* independentTermsMatrix, Matrix* coefficient
     this->executionTime = 0;
 }
 
+
 void GaussTemplate::setCoefficienMatrix(Matrix* matrix){
     this->coefficientMatrix = matrix;
 }
@@ -49,6 +50,16 @@ void GaussTemplate::afterSolve(){
     setCoefficienMatrix(this->coefficientMatrixTemp);
 }
 
+
+void GaussTemplate::switchRows(Matrix *m, int line_i, int line_j){
+    double aux;
+    int width = m->getWidth();
+    for(int k=0; k<width; k++){
+        aux = m->getValue(line_i,k);
+        m->setValue(line_i,k,m->getValue(line_j,k));
+        m->setValue(line_j,k,aux);
+    }
+}
 
 
 void GaussTemplate::retroSubstitutions(){
@@ -91,4 +102,9 @@ void GaussTemplate::setExecutionTime(long double executionTime){
 }
 long double GaussTemplate::getExecutionTime(){
     return this->executionTime;
+}
+
+
+ListResults* GaussTemplate::getResults(){
+   return this->results;
 }

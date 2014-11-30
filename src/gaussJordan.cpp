@@ -9,7 +9,6 @@ void GaussJordan::resolveSytem(){
     double multiplier;
     double newValue_aij;
     double newValue_bi;
-
     int i, j, k;
 
     beforeSolve();
@@ -19,8 +18,10 @@ void GaussJordan::resolveSytem(){
 
     numberOfLines = independentTerms->getHeight();
 
+    saveOnList("Sistema Inicial: ");
+
     for( k = 0; k < numberOfLines; k++ ){
-        saveOnList("Operação realizada nesse ponto");
+
 
         if( k < numberOfLines-1 ){
             for( j = k + 1; j < numberOfLines; j++ ){

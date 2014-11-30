@@ -5,6 +5,7 @@
 #include <sstream>
 #include <string>
 #include <ctime>
+#include <sstream>
 using namespace std;
 
 #include "matrix.h"

@@ -9,13 +9,20 @@ class GaussTemplate {
     Matrix* coefficientMatrixTemp;
     Matrix* independentTermsMatrixTemp;
 
-public:
+protected:
+    void resetList();
+    void saveOnList(std::string desc);
+    void retroSubstitutions();
+    void beforeSolve();
+    void afterSolve();
 
+    void switchRows(Matrix *m, int line_i, int line_j);
+
+public:
     GaussTemplate(Matrix* independentTermsMatrix, Matrix* coefficientMatrix);
 
     void setCoefficienMatrix(Matrix* matrix);
     Matrix *getCoefficienMatrix();
-
 
     void setIndependentTerms(Matrix* matrix);
     Matrix *getIndependentTerms();
@@ -25,13 +32,7 @@ public:
     void setExecutionTime(long double executionTime);
     long double getExecutionTime();
 
-    void retroSubstitutions();
-
-    void resetList();
-    void saveOnList(std::string desc);
-
-    void beforeSolve();
-    void afterSolve();
+    ListResults* getResults();
 
     virtual void resolveSytem() = 0;
 
