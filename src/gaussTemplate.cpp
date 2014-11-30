@@ -4,7 +4,6 @@
 GaussTemplate::GaussTemplate(Matrix* independentTermsMatrix, Matrix* coefficientMatrix){
     this->independentTermsMatrix = independentTermsMatrix;
     this->coefficientMatrix = coefficientMatrix;
-    this->unknownsMatrix = NULL;
     this->results = new ListResults();
     this->solvable = true;
     this->executionTime = 0;
@@ -36,7 +35,8 @@ void GaussTemplate::beforeSolve(){
     this->independentTermsMatrixTemp = getIndependentTerms();
     this->coefficientMatrixTemp = getCoefficienMatrix();
     setIndependentTerms(copy1);
-    setCoefficienMatrix(copy2);
+    setCoefficienMatrix(copy2);    
+
     setSolvable(true);
     setExecutionTime(0);
     resetList();
@@ -83,6 +83,7 @@ void GaussTemplate::retroSubstitutions(){
         unknown_k = (coefficients->getValue(k,0) - sum)/independentTerms->getValue(k,k);
         unknowns->setValue(k,0,unknown_k);
     }
+    delete this->unknownsMatrix;
     this->unknownsMatrix = unknowns;
 }
 
