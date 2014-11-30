@@ -152,7 +152,7 @@ void MainWindow::setResultMethod(GaussTemplate *method, int type){
         sError = QString("Nao foi possivel calcular os raios utilizando o metodo escolhido");
     }
     sTime = QString::number(method->getExecutionTime(),'g',12);
-    sInterations = QString::number(method->getExecutionTime(),'g',12);
+    sInterations = QString::number(method->getResults()->getLength(),'g',12);
 
     setTable(raios,tableRaio);
     setTable(areas,tableArea);

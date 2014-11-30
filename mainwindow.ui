@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -222,7 +222,7 @@
          </rect>
         </property>
         <property name="text">
-         <string>Iterações:</string>
+         <string>Operações:</string>
         </property>
        </widget>
        <widget class="QLabel" name="labelErrorGauss">
@@ -393,7 +393,7 @@
          </rect>
         </property>
         <property name="text">
-         <string>Iterações:</string>
+         <string>Operações:</string>
         </property>
        </widget>
        <widget class="QLabel" name="label_15">
@@ -584,7 +584,7 @@
          </rect>
         </property>
         <property name="text">
-         <string>Iterações:</string>
+         <string>Operações:</string>
         </property>
        </widget>
        <widget class="QLabel" name="labelErrorGaussComp">
@@ -701,7 +701,7 @@
          </rect>
         </property>
         <property name="text">
-         <string>Iterações:</string>
+         <string>Operações:</string>
         </property>
        </widget>
        <widget class="QLabel" name="labelErrorGaussJordanComp">
