@@ -23,17 +23,23 @@ void Gauss::resolveSytem( bool usePivot ){
 
     saveOnList("SistemaInicial: ");
 
+
     try{
         for(int k = 0; k<=numberOfLines-2; k++){
             for(int i = k +1; i<=numberOfLines-1;i++){
                 start = clock();
+
+                if(usePivot == true){
+                    pivoting( independentTerms, coefficients, numberOfLines, k );
+                }
+
                 pivo = independentTerms->getValue(k,k);
 
                 if(pivo == 0){
                     end = clock();
                     executionTime = executionTime + (end - start);
-
-                    throw 0;}
+                    throw 0;
+                }
 
                 multiplier = independentTerms->getValue(i,k)/pivo;
                 independentTerms->setValue(i,k,0);
@@ -60,7 +66,9 @@ void Gauss::resolveSytem( bool usePivot ){
         retroSubstitutions();
         end = clock();
         executionTime = executionTime + (end - start);
+
     }
+
     catch(int e){
         saveOnList("Nao foi possivel continuar pois o pivô atual é igual a zero.");
         setSolvable(false);
