@@ -16,6 +16,8 @@ protected:
     void beforeSolve();
     void afterSolve();
 
+    void pivoting(Matrix* A, Matrix* b, int numberOfLines, int k);
+
     void switchRows(Matrix *m, int line_i, int line_j);
 
 public:

@@ -5,6 +5,4 @@ public:
     GaussJordan(Matrix* independentTermsMatrix, Matrix* coefficientMatrix);
 
     void resolveSytem();
-
-    void pivoting(Matrix* A, Matrix* b, int numberOfLines, int k);
 };

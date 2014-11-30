@@ -68,25 +68,4 @@ void GaussJordan::resolveSytem(){
 }
 
 
-void GaussJordan::pivoting(Matrix* A, Matrix* b, int numberOfLines, int k){
-       double max = A->getValue(k,k);
-       int index = k;
-       for( int i = 0; i < numberOfLines; i++){
-           if( i != k ){
-               if ( fabs( A->getValue( i, k ) ) > fabs( max ) ){
-                    max = A->getValue( i, k );
-                    index = i;
-               }
 
-           }
-       }
-       double temp1, temp2;
-       for( int j = 0; j < numberOfLines; j++ ){
-            temp1 = A->getValue( k, j );
-            A->setValue( k, j, A->getValue( index, j) );
-            A->setValue( index, j, temp1 );
-       }
-       temp2 = b->getValue( k, 0 );
-       b->setValue( k, 0, b->getValue( index, 0) );
-       b->setValue( index, 0, temp2);
-}
