@@ -4,8 +4,8 @@
 GaussTemplate::GaussTemplate(Matrix* independentTermsMatrix, Matrix* coefficientMatrix){
     this->independentTermsMatrix = independentTermsMatrix;
     this->coefficientMatrix = coefficientMatrix;
-    this->unknownsMatrix = NULL;
     this->results = new ListResults();
+    this->solvable = true;
     this->executionTime = 0;
 }
 
@@ -34,8 +34,9 @@ void GaussTemplate::beforeSolve(){
     this->independentTermsMatrixTemp = getIndependentTerms();
     this->coefficientMatrixTemp = getCoefficienMatrix();
     setIndependentTerms(copy1);
-    setCoefficienMatrix(copy2);
+    setCoefficienMatrix(copy2);    
 
+    setSolvable(true);
     setExecutionTime(0);
     resetList();
 
@@ -81,6 +82,7 @@ void GaussTemplate::retroSubstitutions(){
         unknown_k = (coefficients->getValue(k,0) - sum)/independentTerms->getValue(k,k);
         unknowns->setValue(k,0,unknown_k);
     }
+    delete this->unknownsMatrix;
     this->unknownsMatrix = unknowns;
 }
 
@@ -119,15 +121,18 @@ void GaussTemplate::pivoting(Matrix* A, Matrix* b, int numberOfLines, int k){
                }
            }
        }
-       double temp1, temp2;
-       for( int j = 0; j < numberOfLines; j++ ){
-            temp1 = A->getValue( k, j );
-            A->setValue( k, j, A->getValue( index, j) );
-            A->setValue( index, j, temp1 );
-       }
-       temp2 = b->getValue( k, 0 );
-       b->setValue( k, 0, b->getValue( index, 0) );
-       b->setValue( index, 0, temp2);
+       switchRows(A,k,index);
+       switchRows(b,k,index);
+}
+
+
+bool GaussTemplate::isSolvable(){
+    return this->solvable;
+}
+
+
+void GaussTemplate::setSolvable(bool s){
+    this->solvable = s;
 }
 
 double GaussTemplate::getError(){
