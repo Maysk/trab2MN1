@@ -9,7 +9,7 @@ Area::Area(Matrix *raio)
 }
 void Area::calculeArea(){
     for(int i = 0 ; i < raio->getHeight(); i++)
-        area->setValue(i,0,raio->getValue(i,0) * M_PI);
+        area->setValue(i,0,raio->getValue(i,0) * raio->getValue(i,0) * M_PI);
 }
 
 void Area::setRaio(Matrix *raio){
