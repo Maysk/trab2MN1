@@ -37,12 +37,6 @@ MainWindow::MainWindow(QWidget *parent) :
     setDimensionNx1( valN,tableRGaussJordanComp);
     setDimensionNx1( valN,tableAreaGaussJordanComp);
 
-    //Teste de desenho:
-//    double raiosTeste[5] = {1,1,2,2,4};
-//    this->desenhar(5,raiosTeste);
-    //Fim do teste de desenho
-
-
     setMatrixCandD();
 }
 
@@ -213,7 +207,6 @@ void MainWindow::setMatrixCandD(){
     }
 }
 
-//TODO:passo a passo e labels
 void MainWindow::setTable(Matrix *matrix, QTableWidget *table){
     double lines = matrix->getHeight();
     double collumns = matrix->getWidth();
@@ -225,6 +218,59 @@ void MainWindow::setTable(Matrix *matrix, QTableWidget *table){
     }
 
 }
+
+
+
+void MainWindow::on_radioButtonGauss_toggled(bool checked)
+{
+    Gauss *gauss = new Gauss(matrixC,matrixD);
+    setResultMethod(gauss,0);
+    if(gauss->isSolvable())
+        desenhar(spinBox_QtdC->value() ,gauss->getUnknownsMatrix());
+    else
+        ui->graphicsView->setScene(NULL);
+    showMessage(checked);
+
+//    delete gauss;
+}
+
+void MainWindow::on_radioButtonGaussJordan_toggled(bool checked)
+{
+    GaussJordan *gaussJordan = new GaussJordan(matrixC,matrixD);
+    setResultMethod(gaussJordan,1);
+
+    showMessage(checked);
+
+//    delete gaussJordan;
+}
+
+void MainWindow::on_radioButtonComp_toggled(bool checked)
+{
+    Gauss *gauss = new Gauss(matrixC,matrixD);
+    setResultMethod(gauss,2);
+
+    GaussJordan *gaussJordan = new GaussJordan(matrixC,matrixD);
+    setResultMethod(gaussJordan,3);
+
+    showMessage(checked);
+
+//    delete gauss;
+//    delete gaussJordan;
+}
+
+void MainWindow::showMessage(bool cheked){
+    if(cheked){
+        Dialog *dialog = new Dialog(NULL,"Confirmado","Pivoteamento ativado");
+        dialog->show();
+    }
+    else{
+        Dialog *dialog = new Dialog(NULL,"Confirmado","Pivoteamento desativado");
+        dialog->show();
+    }
+}
+
+
+//Lucas esteve aqui
 
 //Desenhar as circunferencias:
 void MainWindow::desenhar(int n, Matrix* raiosM){ //extends PoG_DESIGN_PATTERN
@@ -469,50 +515,4 @@ void MainWindow::desenhar(int n, Matrix* raiosM){ //extends PoG_DESIGN_PATTERN
 
 }
 
-void MainWindow::on_radioButtonGauss_toggled(bool checked)
-{
-    Gauss *gauss = new Gauss(matrixC,matrixD);
-    setResultMethod(gauss,0);
-    if(gauss->isSolvable())
-        desenhar(spinBox_QtdC->value() ,gauss->getUnknownsMatrix());
-    else
-        ui->graphicsView->setScene(NULL);
-    showMessage(checked);
 
-//    delete gauss;
-}
-
-void MainWindow::on_radioButtonGaussJordan_toggled(bool checked)
-{
-    GaussJordan *gaussJordan = new GaussJordan(matrixC,matrixD);
-    setResultMethod(gaussJordan,1);
-
-    showMessage(checked);
-
-//    delete gaussJordan;
-}
-
-void MainWindow::on_radioButtonComp_toggled(bool checked)
-{
-    Gauss *gauss = new Gauss(matrixC,matrixD);
-    setResultMethod(gauss,2);
-
-    GaussJordan *gaussJordan = new GaussJordan(matrixC,matrixD);
-    setResultMethod(gaussJordan,3);
-
-    showMessage(checked);
-
-//    delete gauss;
-//    delete gaussJordan;
-}
-
-void MainWindow::showMessage(bool cheked){
-    if(cheked){
-        Dialog *dialog = new Dialog(NULL,"Confirmado","Pivoteamento ativado");
-        dialog->show();
-    }
-    else{
-        Dialog *dialog = new Dialog(NULL,"Confirmado","Pivoteamento desativado");
-        dialog->show();
-    }
-}
