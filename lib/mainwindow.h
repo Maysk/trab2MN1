@@ -36,6 +36,14 @@ private slots:
 
     void desenhar(int n, double raios[]);
 
+    void on_radioButtonGauss_toggled(bool checked);
+
+    void on_radioButtonGaussJordan_toggled(bool checked);
+
+    void on_radioButtonComp_toggled(bool checked);
+
+    void showMessage(bool cheked);
+
 private:
     Ui::MainWindow *ui;
 };

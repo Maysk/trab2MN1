@@ -9,7 +9,6 @@ GaussTemplate::GaussTemplate(Matrix* independentTermsMatrix, Matrix* coefficient
     this->executionTime = 0;
 }
 
-
 void GaussTemplate::setCoefficienMatrix(Matrix* matrix){
     this->coefficientMatrix = matrix;
 }
