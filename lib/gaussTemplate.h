@@ -3,6 +3,7 @@ class GaussTemplate {
     Matrix* independentTermsMatrix;
     Matrix* unknownsMatrix;
     ListResults* results;
+    bool solvable;
     long double executionTime;
 
     //Atributos que nao possuem getter or setters.
@@ -20,6 +21,8 @@ protected:
 
     void switchRows(Matrix *m, int line_i, int line_j);
 
+    void setSolvable(bool s);
+
 public:
     GaussTemplate(Matrix* independentTermsMatrix, Matrix* coefficientMatrix);
 
@@ -35,6 +38,8 @@ public:
     long double getExecutionTime();
 
     ListResults* getResults();
+
+    bool isSolvable();
 
     virtual void resolveSytem() = 0;
 

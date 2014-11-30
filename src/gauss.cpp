@@ -7,7 +7,6 @@ void Gauss::resolveSytem(){
     double multiplier;
     double newValue_aij;
     double newValue_bi;
-
     long double executionTimeInSec = 0;
     clock_t executionTime = 0;
     clock_t start;
@@ -21,6 +20,7 @@ void Gauss::resolveSytem(){
     numberOfLines = independentTerms->getHeight();
 
     saveOnList("SistemaInicial: ");
+
 
     for(int k = 0; k<=numberOfLines-2; k++){
         for(int i = k +1; i<=numberOfLines-1;i++){
