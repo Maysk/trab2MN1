@@ -156,9 +156,22 @@ void MainWindow::setResultMethod(GaussTemplate *method, int type){
 
     setTable(raios,tableRaio);
     setTable(areas,tableArea);
+
     time->setText(sTime);
     interations->setText(sInterations);
     error->setText(sError);
+    if(type < 2){
+        QPlainTextEdit *passo;
+        switch(type){
+        case 0:
+                passo = ui->plainTextEditGauss;
+            break;
+        case 1:
+            passo = ui->plainTextEditGaussJordan;
+            break;
+        }
+        passo->setPlainText(QString::fromStdString(method->getResults()->toString()));
+    }
 }
 
 void MainWindow::on_pushButton_clicked()
