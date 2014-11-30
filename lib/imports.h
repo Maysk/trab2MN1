@@ -14,6 +14,7 @@ using namespace std;
 #include "gaussTemplate.h"
 #include "gaussjordan.h"
 #include "gauss.h"
+#include "area.h"
 #include "dialog.h"
 #include "mainwindow.h"
 

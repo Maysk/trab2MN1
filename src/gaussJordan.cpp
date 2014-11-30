@@ -35,11 +35,11 @@ void GaussJordan::resolveSytem(){
         coefficients->setValue( k, 0, newValue_bi );
         independentTerms->setValue( k, k, 1 );
 
-        cout << "-----------------ITERATION - K = " << k << endl;
+//        cout << "-----------------ITERATION - K = " << k << endl;
 
-        independentTerms->printMatrix();
+//        independentTerms->printMatrix();
 
-        coefficients->printMatrix();
+//        coefficients->printMatrix();
 
 
         for( i = 0; i < numberOfLines; i++ ){

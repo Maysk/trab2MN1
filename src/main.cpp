@@ -11,7 +11,6 @@ int main(int argc, char *argv[])
 
     return a.exec();
 
-
 //    Matrix *iTM = new Matrix(3,3);
 //    Matrix *cM = new Matrix (3,1);
 //    iTM->setValue(0,0,10);    iTM->setValue(0,1,1);    iTM->setValue(0,2,1);
