@@ -104,6 +104,10 @@ void MainWindow::setResultMethod(GaussTemplate *method, int type){
 
     bool pivoteamento;
 
+    QString sTime;
+    QString sInterations;
+    QString sError;
+
     switch(type){
     case 0:
         time = ui->labelTimeGauss;
@@ -139,20 +143,28 @@ void MainWindow::setResultMethod(GaussTemplate *method, int type){
         break;
     }
     method->resolveSytem(pivoteamento);
-    raios = method->getUnknownsMatrix();
+    if(method->isSolvable()){
+        raios = method->getUnknownsMatrix();
 
-    area = new Area(raios);
-    areas = area->getArea();
+        area = new Area(raios);
+        areas = area->getArea();
+
+        sError = QString::number(method->getError(),'g',12);
+
+    }
+    else{
+        raios = new Matrix(matrixC->getHeight(),matrixD->getWidth());
+        areas = new Matrix(matrixC->getHeight(),matrixD->getWidth());
+        sError = QString("Nao foi possivel calcular os raios utilizando o metodo escolhido");
+    }
+    sTime = QString::number(method->getExecutionTime(),'g',12);
+    sInterations = QString::number(method->getExecutionTime(),'g',12);
 
     setTable(raios,tableRaio);
     setTable(areas,tableArea);
-
-
-    time->setText(QString::number(method->getExecutionTime(),'g',12));
-    interations->setText(QString::number(method->getExecutionTime(),'g',12));
-    error->setText(QString::number(method->getError(),'g',12));
-
-    //TODO: colocar erro e iterações
+    time->setText(sTime);
+    interations->setText(sInterations);
+    error->setText(sError);
 }
 
 void MainWindow::on_pushButton_clicked()
@@ -162,7 +174,8 @@ void MainWindow::on_pushButton_clicked()
     //resolução por Gauss
     Gauss *gauss = new Gauss(matrixC,matrixD);
     setResultMethod(gauss,0);
-    desenhar(spinBox_QtdC->value() ,gauss->getUnknownsMatrix());
+    if(gauss->isSolvable())
+        desenhar(spinBox_QtdC->value() ,gauss->getUnknownsMatrix());
     setResultMethod(gauss,2);
     //resolução por Gauss fim
 
