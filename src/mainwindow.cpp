@@ -102,6 +102,8 @@ void MainWindow::setResultMethod(GaussTemplate *method, int type){
 
     Area *area;
 
+    bool pivoteamento;
+
     switch(type){
     case 0:
         time = ui->labelTimeGauss;
@@ -109,6 +111,7 @@ void MainWindow::setResultMethod(GaussTemplate *method, int type){
         error = ui->labelErrorGauss;
         tableRaio = tableRGauss;
         tableArea = tableAreaGauss;
+        pivoteamento = ui->radioButtonGauss->isChecked();
         break;
     case 1:
         time = ui->labelTimeGaussJordan;
@@ -116,6 +119,7 @@ void MainWindow::setResultMethod(GaussTemplate *method, int type){
         error = ui->labelErrorGaussJordan;
         tableRaio = tableRGaussJordan;
         tableArea = tableAreaGaussJordan;
+        pivoteamento = ui->radioButtonGaussJordan->isChecked();
         break;
     case 2:
         time = ui->labelTimeGaussComp;
@@ -123,6 +127,7 @@ void MainWindow::setResultMethod(GaussTemplate *method, int type){
         error = ui->labelErrorGaussComp;
         tableRaio = tableRGaussComp;
         tableArea = tableAreaGaussComp;
+        pivoteamento = ui->radioButtonComp->isChecked();
         break;
     case 3:
         time = ui->labelTimeGaussJordanComp;
@@ -130,6 +135,7 @@ void MainWindow::setResultMethod(GaussTemplate *method, int type){
         error = ui->labelErrorGaussJordanComp;
         tableRaio = tableRGaussJordanComp;
         tableArea = tableAreaGaussJordanComp;
+        pivoteamento = ui->radioButtonComp->isChecked();
         break;
     }
     method->resolveSytem();
@@ -140,7 +146,11 @@ void MainWindow::setResultMethod(GaussTemplate *method, int type){
 
     setTable(raios,tableRaio);
     setTable(areas,tableArea);
+
+
     time->setText(QString::number(method->getExecutionTime(),'g',12));
+    interations->setText(QString::number(method->getExecutionTime(),'g',12));
+    error->setText(QString::number(method->getExecutionTime(),'g',12));
 
     //TODO: colocar erro e iterações
 }
@@ -163,6 +173,10 @@ void MainWindow::on_pushButton_clicked()
 
     Dialog *dialog = new Dialog(NULL,"Confirmado","Configurações confirmadas");
     dialog->show();
+
+
+//    delete gauss;
+//    delete gaussJordan;
 }
 void MainWindow::setMatrixCandD(){
     delete matrixC;
@@ -410,4 +424,49 @@ void MainWindow::desenhar(int n, double raios[]){ //extends PoG_DESIGN_PATTERN
 
     }
 
+}
+
+void MainWindow::on_radioButtonGauss_toggled(bool checked)
+{
+    Gauss *gauss = new Gauss(matrixC,matrixD);
+    setResultMethod(gauss,0);
+
+    showMessage(checked);
+
+//    delete gauss;
+}
+
+void MainWindow::on_radioButtonGaussJordan_toggled(bool checked)
+{
+    GaussJordan *gaussJordan = new GaussJordan(matrixC,matrixD);
+    setResultMethod(gaussJordan,1);
+
+    showMessage(checked);
+
+//    delete gaussJordan;
+}
+
+void MainWindow::on_radioButtonComp_toggled(bool checked)
+{
+    Gauss *gauss = new Gauss(matrixC,matrixD);
+    setResultMethod(gauss,2);
+
+    GaussJordan *gaussJordan = new GaussJordan(matrixC,matrixD);
+    setResultMethod(gaussJordan,3);
+
+    showMessage(checked);
+
+//    delete gauss;
+//    delete gaussJordan;
+}
+
+void MainWindow::showMessage(bool cheked){
+    if(cheked){
+        Dialog *dialog = new Dialog(NULL,"Confirmado","Pivoteamento ativado");
+        dialog->show();
+    }
+    else{
+        Dialog *dialog = new Dialog(NULL,"Confirmado","Pivoteamento desativado");
+        dialog->show();
+    }
 }
