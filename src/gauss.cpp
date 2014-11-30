@@ -9,6 +9,7 @@ void Gauss::resolveSytem(){
     double newValue_bi;
     double pivo;
     long double executionTimeInSec = 0;
+
     clock_t executionTime = 0;
     clock_t start;
     clock_t end;
