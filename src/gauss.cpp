@@ -60,6 +60,13 @@ void Gauss::resolveSytem( bool usePivot ){
                description.str("");
 
             }
+
+            if(independentTerms->getValue(numberOfLines-1,numberOfLines-1) == 0){
+                end = clock();
+                executionTime = executionTime + (end - start);
+                throw 1;
+            }
+
         }
 
         start = clock();
@@ -70,7 +77,12 @@ void Gauss::resolveSytem( bool usePivot ){
     }
 
     catch(int e){
-        saveOnList("Nao foi possivel continuar pois o pivô atual é igual a zero.\n");
+        if( e == 0 ){
+            saveOnList("Nao foi possivel continuar pois o pivô atual é igual a zero.\n");
+        }
+        if( e == 1 ){
+            saveOnList("Não é possivel realizar a retro-substituição\n");
+        }
         setSolvable(false);
     }
 
