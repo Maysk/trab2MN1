@@ -4,9 +4,7 @@ class GaussJordan : public GaussTemplate{
 public:
     GaussJordan(Matrix* independentTermsMatrix, Matrix* coefficientMatrix);
 
-    void beforeSolve();
     void resolveSytem();
-    void afterSolve();
 
     void pivoting(Matrix* A, Matrix* b, int numberOfLines, int k);
 };
