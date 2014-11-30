@@ -138,7 +138,9 @@ void MainWindow::setResultMethod(GaussTemplate *method, int type){
         pivoteamento = ui->radioButtonComp->isChecked();
         break;
     }
-    method->resolveSytem();
+    cout << "pegou valor\n";
+    if(method->isSolvable())
+        method->resolveSytem();
     raios = method->getUnknownsMatrix();
 
     area = new Area(raios);
