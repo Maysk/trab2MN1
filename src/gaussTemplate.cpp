@@ -120,12 +120,11 @@ void GaussTemplate::pivoting(Matrix* A, Matrix* b, int numberOfLines, int k){
 
 
     for( int i = k+1; i < numberOfLines; i++){
-        if( i != k ){
-            if ( fabs( A->getValue( i, k ) ) > fabs( max ) ){
-                max = A->getValue( i, k );
-                index = i;
-            }
+        if ( fabs( A->getValue( i, k ) ) > fabs( max ) ){
+            max = A->getValue( i, k );
+            index = i;
         }
+
     }
     if(index!=k){
         std::ostringstream description;
