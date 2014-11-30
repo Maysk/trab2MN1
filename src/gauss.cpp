@@ -21,7 +21,7 @@ void Gauss::resolveSytem( bool usePivot ){
     Matrix* independentTerms = getIndependentTerms();
     numberOfLines = independentTerms->getHeight();
 
-    saveOnList("SistemaInicial: ");
+    saveOnList("SistemaInicial: \n");
 
 
     try{
@@ -54,7 +54,7 @@ void Gauss::resolveSytem( bool usePivot ){
                 end = clock();
                 executionTime = executionTime + (end - start);
 
-               description<<"Operação realizada: L"<< i <<" <- L"<< i <<" - ("<< multiplier <<") * L"<< k;
+               description<<"Operação realizada: L"<< i <<" <- L"<< i <<" - ("<< multiplier <<") * L"<< k<<"\n";
 
                saveOnList(description.str());
                description.str("");
