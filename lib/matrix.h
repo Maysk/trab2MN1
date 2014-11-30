@@ -19,4 +19,6 @@ public:
     Matrix* getCopy();
     void printMatrix();
 
+    Matrix* multipy(Matrix *m);
+    Matrix* subtraction(Matrix *m);
 };

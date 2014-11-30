@@ -150,7 +150,7 @@ void MainWindow::setResultMethod(GaussTemplate *method, int type){
 
     time->setText(QString::number(method->getExecutionTime(),'g',12));
     interations->setText(QString::number(method->getExecutionTime(),'g',12));
-    error->setText(QString::number(method->getExecutionTime(),'g',12));
+    error->setText(QString::number(method->getError(),'g',12));
 
     //TODO: colocar erro e iterações
 }
@@ -161,13 +161,17 @@ void MainWindow::on_pushButton_clicked()
 
     //resolução por Gauss
     Gauss *gauss = new Gauss(matrixC,matrixD);
+    cout <<"Gauss\n";
     setResultMethod(gauss,0);
+    cout <<"GaussComp\n";
     setResultMethod(gauss,2);
     //resolução por Gauss fim
 
     //Gauss-Jordan
     GaussJordan *gaussJordan = new GaussJordan(matrixC,matrixD);
+    cout <<"GaussJordan\n";
     setResultMethod(gaussJordan,1);
+    cout <<"GaussJordanComp\n";
     setResultMethod(gaussJordan,3);
     //Gauss-jordan FIM
 

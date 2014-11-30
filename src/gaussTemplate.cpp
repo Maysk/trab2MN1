@@ -129,3 +129,28 @@ void GaussTemplate::pivoting(Matrix* A, Matrix* b, int numberOfLines, int k){
        b->setValue( k, 0, b->getValue( index, 0) );
        b->setValue( index, 0, temp2);
 }
+
+double GaussTemplate::getError(){
+    Matrix *x = unknownsMatrix->getCopy();
+    Matrix *CX = independentTermsMatrix->multipy(x);
+    Matrix *residuo = coefficientMatrix->subtraction(CX);
+//    residuo->printMatrix();
+    cout << "coeficiente:\n";
+    coefficientMatrix->printMatrix();
+    cout << "independentes:\n";
+    independentTermsMatrix->printMatrix();
+    cout << "X:\n";
+    x->printMatrix();
+    cout << "CX:\n";
+    CX->printMatrix();
+    cout << "residuo\n";
+    residuo->printMatrix();
+    double maior = 0;
+    for(int i = 0; i < residuo->getHeight(); i++)
+        for(int j = 0; j < residuo->getWidth(); j++)
+            if(fabs(maior) < fabs(residuo->getValue(i,j)))
+                maior = residuo->getValue(i,j);
+    return fabs(maior);
+
+
+}

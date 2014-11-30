@@ -2,8 +2,7 @@
 
 Area::Area(Matrix *raio)
 {
-    this->raio = new Matrix(raio->getHeight(),raio->getWidth());
-    (*this->raio) = (*raio);
+    this->raio = raio->getCopy();
     this->area = new Matrix(raio->getHeight(),raio->getWidth());
     calculeArea();
 }
@@ -16,8 +15,7 @@ void Area::setRaio(Matrix *raio){
     delete this->raio;
     delete this->area;
     this->area = new Matrix(raio->getHeight(),raio->getWidth());
-    this->raio = new Matrix(raio->getHeight(),raio->getWidth());
-    (*this->raio) = (*raio);
+    this->raio = raio->getCopy();
     calculeArea();
 }
 

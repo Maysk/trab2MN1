@@ -22,8 +22,8 @@ void GaussJordan::resolveSytem(){
     for( k = 0; k < numberOfLines; k++ ){
         saveOnList("Operação realizada nesse ponto");
 
-        independentTerms->printMatrix();
-        coefficients->printMatrix();
+//        independentTerms->printMatrix();
+//        coefficients->printMatrix();
 
         if( independentTerms->getValue(k,k) == 0 ){
             pivoting( independentTerms, coefficients, numberOfLines, k );

@@ -27,6 +27,21 @@ int main(int argc, char *argv[])
 //    iTM->printMatrix();
 //    g->getUnknownsMatrix()->printMatrix();
 
+
+//    cout << "subtração\n";
+//    cM->printMatrix();
+//    cout <<"-\n";
+//    g->getUnknownsMatrix()->printMatrix();
+//    cout <<"=\n";
+//    Matrix *nova = (*cM) - (*g->getUnknownsMatrix());
+//    nova->printMatrix();
+//    Matrix *nova = (*iTM) * (*g->getUnknownsMatrix());
+//    cout << "vai multiplicar:\n";
+//    iTM->printMatrix();
+//    g->getUnknownsMatrix()->printMatrix();
+//    cout <<"Deu:\n";
+//    nova->printMatrix();
+
 //    cout << "Tempo: " << g->getExecutionTime() <<endl;
 //    g->resolveSytem();
 //    g->getUnknownsMatrix()->printMatrix();

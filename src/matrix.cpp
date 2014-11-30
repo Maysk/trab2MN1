@@ -63,3 +63,34 @@ void Matrix::printMatrix(){
         cout << endl;
     }
 }
+
+
+Matrix* Matrix::multipy(Matrix *m){
+    Matrix *result = new Matrix(this->getHeight(),m->getWidth());
+    if(this->getWidth() == m->getHeight()){
+        for(int i = 0; i < this->getHeight() ; i++ )
+            for(int j = 0 ; j < m->getWidth(); j++)
+                for(int w = 0 ; w < this->getWidth() ; w++)
+                    result->setValue(i,j, result->getValue(i,j) + (this->getValue(i,w) * m->getValue(w,j)));
+    }
+    return  result;
+}
+
+Matrix* Matrix::subtraction(Matrix *m){
+    cout << "subtração:\n";
+    this->printMatrix();
+    cout <<"-\n";
+    m->printMatrix();
+    Matrix *result = new Matrix(this->getHeight(),this->getWidth());
+    if((this->getWidth() == m->getWidth()) && (this->getHeight() == m->getHeight()) ){
+        setprecision(20);
+        for(int i = 0; i < this->getHeight() ; i++ )
+            for(int j = 0 ; j < this->getWidth(); j++){
+                cout <<this->getValue(i,j) << "-" << m->getValue(i,j) << "=" <<this->getValue(i,j) - m->getValue(i,j)<<endl;
+                result->setValue(i,j,this->getValue(i,j) - m->getValue(i,j));
+            }
+    }
+    cout << "=\n";
+    result->printMatrix();
+    return  result;
+}

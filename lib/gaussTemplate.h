@@ -38,5 +38,5 @@ public:
 
     virtual void resolveSytem() = 0;
 
-
+    double getError();
 };
