@@ -73,8 +73,6 @@ void GaussJordan::resolveSytem( bool usePivot ){
                 }
 
             }
-            end = clock();
-            executionTime = executionTime + (end - start);
         }
 
         start = clock();
