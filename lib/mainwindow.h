@@ -9,6 +9,7 @@
 #include <QGraphicsEllipseItem>
 
 class Matrix;
+class GaussTemplate;
 namespace Ui {
 class MainWindow;
 }
@@ -30,6 +31,8 @@ private slots:
 
     void setTable(Matrix *matrix, QTableWidget *table);
     void on_pushButton_clicked();
+
+    void setResultMethod(GaussTemplate *method,int type); //Type: 0 = Gauss; 1 = Gauss-Jordan; 2 = GaussComp; 3 = Gauss-JordanComp
 
     void desenhar(int n, double raios[]);
 

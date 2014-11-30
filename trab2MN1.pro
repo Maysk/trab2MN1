@@ -21,6 +21,7 @@ SOURCES +=  src/main.cpp\
             src/gauss.cpp \
             src/dialog.cpp \
             src/mainwindow.cpp \
+    src/area.cpp
 
 HEADERS  += lib/imports.h \
             lib/matrix.h \
@@ -31,6 +32,7 @@ HEADERS  += lib/imports.h \
             lib/gauss.h \
             lib/dialog.h \
             lib/mainwindow.h \
+            lib/area.h
 
 FORMS    += mainwindow.ui\
             dialog.ui

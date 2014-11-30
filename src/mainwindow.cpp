@@ -89,25 +89,76 @@ void MainWindow::on_spinBox_QtdC_valueChanged(int valN)
     setDimensionNx1( valN,tableAreaGaussJordanComp);
 }
 
+void MainWindow::setResultMethod(GaussTemplate *method, int type){
+    QLabel *time;
+    QLabel *interations;
+    QLabel *error;
+
+    QTableWidget *tableRaio;
+    QTableWidget *tableArea;
+
+    Matrix *raios;
+    Matrix *areas;
+
+    Area *area;
+
+    switch(type){
+    case 0:
+        time = ui->labelTimeGauss;
+        interations = ui->labelInterationsGauss;
+        error = ui->labelErrorGauss;
+        tableRaio = tableRGauss;
+        tableArea = tableAreaGauss;
+        break;
+    case 1:
+        time = ui->labelTimeGaussJordan;
+        interations = ui->labelInterationsGaussJordan;
+        error = ui->labelErrorGaussJordan;
+        tableRaio = tableRGaussJordan;
+        tableArea = tableAreaGaussJordan;
+        break;
+    case 2:
+        time = ui->labelTimeGaussComp;
+        interations = ui->labelInterationsGaussComp;
+        error = ui->labelErrorGaussComp;
+        tableRaio = tableRGaussComp;
+        tableArea = tableAreaGaussComp;
+        break;
+    case 3:
+        time = ui->labelTimeGaussJordanComp;
+        interations = ui->labelInterationsGaussJordanComp;
+        error = ui->labelErrorGaussJordanComp;
+        tableRaio = tableRGaussJordanComp;
+        tableArea = tableAreaGaussJordanComp;
+        break;
+    }
+    method->resolveSytem();
+    raios = method->getUnknownsMatrix();
+
+    area = new Area(raios);
+    areas = area->getArea();
+
+    setTable(raios,tableRaio);
+    setTable(areas,tableArea);
+    time->setText(QString::number(method->getExecutionTime(),'g',12));
+
+    //TODO: colocar erro e iterações
+}
+
 void MainWindow::on_pushButton_clicked()
 {
     setMatrixCandD();
 
     //resolução por Gauss
     Gauss *gauss = new Gauss(matrixC,matrixD);
-    gauss->resolveSytem();
-    Matrix *resolutionGauss = gauss->getUnknownsMatrix();
-    setTable(resolutionGauss,tableRGauss);
-    setTable(resolutionGauss,tableRGaussComp);
-    ui->labelTimeGauss->setText(QString::number(gauss->getExecutionTime(),'g',12));
+    setResultMethod(gauss,0);
+    setResultMethod(gauss,2);
     //resolução por Gauss fim
 
     //Gauss-Jordan
     GaussJordan *gaussJordan = new GaussJordan(matrixC,matrixD);
-    gaussJordan->resolveSytem();
-    Matrix *resolutionGaussJordan = gaussJordan->getUnknownsMatrix();
-    setTable(resolutionGaussJordan,tableRGaussJordan);
-    setTable(resolutionGaussJordan,tableRGaussJordanComp);
+    setResultMethod(gaussJordan,1);
+    setResultMethod(gaussJordan,3);
     //Gauss-jordan FIM
 
     Dialog *dialog = new Dialog(NULL,"Confirmado","Configurações confirmadas");
