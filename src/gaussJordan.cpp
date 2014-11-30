@@ -9,61 +9,87 @@ void GaussJordan::resolveSytem( bool usePivot ){
     double multiplier;
     double newValue_aij;
     double newValue_bi;
+    double pivo;
+    long double executionTimeInSec = 0;
 
-    int i, j, k;
+    clock_t executionTime = 0;
+    clock_t start;
+    clock_t end;
+    std::ostringstream description;
 
     beforeSolve();
 
     Matrix* coefficients = getCoefficienMatrix();
     Matrix* independentTerms = getIndependentTerms();
-
     numberOfLines = independentTerms->getHeight();
 
-    for( k = 0; k < numberOfLines; k++ ){
-        saveOnList("Operação realizada nesse ponto");
+    saveOnList("SistemaInicial: \n");
+    try{
+        for(int k = 0; k < numberOfLines; k++ ){
+            start = clock();
 
-//        independentTerms->printMatrix();
-//        coefficients->printMatrix();
+            if(usePivot == true){ pivoting( independentTerms, coefficients, numberOfLines, k ); }
+            pivo = independentTerms->getValue(k,k);
 
-        if( independentTerms->getValue(k,k) == 0 && usePivot == true ){
-            pivoting( independentTerms, coefficients, numberOfLines, k );
+            if(pivo == 0){
+                end = clock();
+                executionTime = executionTime + (end - start);
+                throw 0;
+            }
 
-        }
-
-
-        if( k < numberOfLines-1 ){
-            for( j = k + 1; j < numberOfLines; j++ ){
-                multiplier = independentTerms->getValue( k, j ) / independentTerms->getValue( k, k );
+            for(int j = k+1; j < numberOfLines; j++ ){
+                multiplier = independentTerms->getValue( k, j ) / pivo;
                 independentTerms->setValue( k, j, multiplier );
             }
-        }
 
-        newValue_bi = coefficients->getValue(k,0) / independentTerms->getValue( k, k );
+            newValue_bi = coefficients->getValue(k,0) / pivo;
+            coefficients->setValue( k, 0, newValue_bi );
+            independentTerms->setValue( k, k, 1 );
 
-        coefficients->setValue( k, 0, newValue_bi );
-        independentTerms->setValue( k, k, 1 );
+            end = clock();
+            executionTime = executionTime + (end - start);
 
-        for( i = 0; i < numberOfLines; i++ ){
-            if( i != k ){
-                if( k < numberOfLines-1 ){
-                    for( j = k + 1; j < numberOfLines; j++ ){
+            for(int i = 0; i < numberOfLines; i++ ){
+                if( i != k ){
+                    start=clock();
 
-                        newValue_aij = independentTerms->getValue( i, j ) -
-                                independentTerms->getValue( i, k ) * independentTerms->getValue( k, j );
+                    multiplier = independentTerms->getValue(i,k);
+                    for(int j = k + 1; j < numberOfLines; j++ ){
+                        newValue_aij = independentTerms->getValue( i, j ) - multiplier * independentTerms->getValue( k, j );
                         independentTerms->setValue( i, j, newValue_aij );
                     }
+
+                    newValue_bi = coefficients->getValue( i, 0 ) - multiplier * coefficients->getValue( k, 0 );
+                    coefficients->setValue( i, 0, newValue_bi );
+                    independentTerms->setValue( i, k, 0 );
+
+                    end = clock();
+                    executionTime = executionTime + (end - start);
+
+                    description<<"Operação realizada: L"<< i <<" <- L"<< i <<" - ("<< multiplier <<") * L"<< k<<"\n";
+                    saveOnList(description.str());
+                    description.str("");
+
                 }
 
-                newValue_bi = coefficients->getValue( i, 0 ) -
-                        independentTerms->getValue( i, k ) * coefficients->getValue( k, 0 );
-                coefficients->setValue( i, 0, newValue_bi );
-                independentTerms->setValue( i, k, 0 );
             }
+            end = clock();
+            executionTime = executionTime + (end - start);
         }
 
+        start = clock();
+        retroSubstitutions();
+        end = clock();
+        executionTime = executionTime + (end - start);
 
     }
-    retroSubstitutions();
+    catch(int e){
+        saveOnList("Nao foi possivel continuar pois o pivô atual é igual a zero.");
+        setSolvable(false);
+    }
+
+    executionTimeInSec = executionTime/(long double) CLOCKS_PER_SEC;
+    setExecutionTime(executionTimeInSec);
     afterSolve();
 }
 
