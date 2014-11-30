@@ -50,8 +50,8 @@ void Gauss::resolveSytem(){
 
                description<<"Operação realizada: L"<< i <<" <- L"<< i <<" - ("<< multiplier <<") * L"<< k;
 
-                saveOnList(description.str());
-                description.clear();
+               saveOnList(description.str());
+               description.str("");
 
             }
         }
