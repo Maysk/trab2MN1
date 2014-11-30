@@ -138,9 +138,7 @@ void MainWindow::setResultMethod(GaussTemplate *method, int type){
         pivoteamento = ui->radioButtonComp->isChecked();
         break;
     }
-    cout << "pegou valor\n";
-    if(method->isSolvable())
-        method->resolveSytem();
+    method->resolveSytem();
     raios = method->getUnknownsMatrix();
 
     area = new Area(raios);
@@ -163,17 +161,13 @@ void MainWindow::on_pushButton_clicked()
 
     //resolução por Gauss
     Gauss *gauss = new Gauss(matrixC,matrixD);
-    cout <<"Gauss\n";
     setResultMethod(gauss,0);
-    cout <<"GaussComp\n";
     setResultMethod(gauss,2);
     //resolução por Gauss fim
 
     //Gauss-Jordan
     GaussJordan *gaussJordan = new GaussJordan(matrixC,matrixD);
-    cout <<"GaussJordan\n";
     setResultMethod(gaussJordan,1);
-    cout <<"GaussJordanComp\n";
     setResultMethod(gaussJordan,3);
     //Gauss-jordan FIM
 
