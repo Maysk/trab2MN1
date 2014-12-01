@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>870</width>
-    <height>515</height>
+    <width>920</width>
+    <height>607</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -58,8 +58,8 @@
          <rect>
           <x>0</x>
           <y>50</y>
-          <width>551</width>
-          <height>411</height>
+          <width>611</width>
+          <height>471</height>
          </rect>
         </property>
        </widget>
@@ -79,7 +79,7 @@
        <widget class="QLabel" name="label_3">
         <property name="geometry">
          <rect>
-          <x>690</x>
+          <x>750</x>
           <y>30</y>
           <width>67</width>
           <height>17</height>
@@ -92,17 +92,17 @@
        <widget class="QTableWidget" name="tableD">
         <property name="geometry">
          <rect>
-          <x>685</x>
+          <x>725</x>
           <y>50</y>
-          <width>151</width>
-          <height>411</height>
+          <width>171</width>
+          <height>471</height>
          </rect>
         </property>
        </widget>
        <widget class="QLabel" name="label_4">
         <property name="geometry">
          <rect>
-          <x>560</x>
+          <x>620</x>
           <y>126</y>
           <width>101</width>
           <height>31</height>
@@ -122,7 +122,7 @@
        <widget class="QPushButton" name="pushButton">
         <property name="geometry">
          <rect>
-          <x>560</x>
+          <x>620</x>
           <y>200</y>
           <width>99</width>
           <height>27</height>
@@ -153,7 +153,7 @@
        <widget class="QRadioButton" name="radioButtonGauss">
         <property name="geometry">
          <rect>
-          <x>680</x>
+          <x>730</x>
           <y>0</y>
           <width>161</width>
           <height>22</height>
@@ -168,8 +168,8 @@
          <rect>
           <x>0</x>
           <y>40</y>
-          <width>121</width>
-          <height>331</height>
+          <width>151</width>
+          <height>421</height>
          </rect>
         </property>
        </widget>
@@ -177,7 +177,7 @@
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>380</y>
+          <y>470</y>
           <width>81</width>
           <height>17</height>
          </rect>
@@ -190,7 +190,7 @@
         <property name="geometry">
          <rect>
           <x>90</x>
-          <y>380</y>
+          <y>470</y>
           <width>621</width>
           <height>17</height>
          </rect>
@@ -203,7 +203,7 @@
         <property name="geometry">
          <rect>
           <x>90</x>
-          <y>410</y>
+          <y>500</y>
           <width>621</width>
           <height>17</height>
          </rect>
@@ -216,7 +216,7 @@
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>410</y>
+          <y>500</y>
           <width>81</width>
           <height>17</height>
          </rect>
@@ -229,7 +229,7 @@
         <property name="geometry">
          <rect>
           <x>90</x>
-          <y>440</y>
+          <y>530</y>
           <width>621</width>
           <height>17</height>
          </rect>
@@ -242,7 +242,7 @@
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>440</y>
+          <y>530</y>
           <width>91</width>
           <height>17</height>
          </rect>
@@ -254,7 +254,7 @@
        <widget class="QLabel" name="label_21">
         <property name="geometry">
          <rect>
-          <x>370</x>
+          <x>400</x>
           <y>0</y>
           <width>101</width>
           <height>17</height>
@@ -270,10 +270,10 @@
         </property>
         <property name="geometry">
          <rect>
-          <x>370</x>
+          <x>400</x>
           <y>20</y>
-          <width>471</width>
-          <height>351</height>
+          <width>491</width>
+          <height>441</height>
          </rect>
         </property>
         <property name="readOnly">
@@ -296,17 +296,17 @@
        <widget class="QTableWidget" name="tableAreaGauss">
         <property name="geometry">
          <rect>
-          <x>190</x>
+          <x>200</x>
           <y>40</y>
-          <width>121</width>
-          <height>331</height>
+          <width>161</width>
+          <height>421</height>
          </rect>
         </property>
        </widget>
        <widget class="QLabel" name="label_24">
         <property name="geometry">
          <rect>
-          <x>190</x>
+          <x>200</x>
           <y>20</y>
           <width>67</width>
           <height>17</height>
@@ -324,10 +324,10 @@
        <widget class="QTableWidget" name="tableRGaussJordan">
         <property name="geometry">
          <rect>
-          <x>4</x>
+          <x>0</x>
           <y>40</y>
-          <width>121</width>
-          <height>331</height>
+          <width>151</width>
+          <height>421</height>
          </rect>
         </property>
        </widget>
@@ -347,7 +347,7 @@
        <widget class="QRadioButton" name="radioButtonGaussJordan">
         <property name="geometry">
          <rect>
-          <x>680</x>
+          <x>730</x>
           <y>0</y>
           <width>161</width>
           <height>22</height>
@@ -361,7 +361,7 @@
         <property name="geometry">
          <rect>
           <x>90</x>
-          <y>380</y>
+          <y>470</y>
           <width>621</width>
           <height>17</height>
          </rect>
@@ -374,7 +374,7 @@
         <property name="geometry">
          <rect>
           <x>90</x>
-          <y>440</y>
+          <y>530</y>
           <width>621</width>
           <height>17</height>
          </rect>
@@ -387,7 +387,7 @@
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>410</y>
+          <y>500</y>
           <width>81</width>
           <height>17</height>
          </rect>
@@ -400,7 +400,7 @@
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>440</y>
+          <y>530</y>
           <width>91</width>
           <height>17</height>
          </rect>
@@ -413,7 +413,7 @@
         <property name="geometry">
          <rect>
           <x>90</x>
-          <y>410</y>
+          <y>500</y>
           <width>621</width>
           <height>17</height>
          </rect>
@@ -426,7 +426,7 @@
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>380</y>
+          <y>470</y>
           <width>81</width>
           <height>17</height>
          </rect>
@@ -438,10 +438,10 @@
        <widget class="QPlainTextEdit" name="plainTextEditGaussJordan">
         <property name="geometry">
          <rect>
-          <x>370</x>
+          <x>400</x>
           <y>20</y>
-          <width>471</width>
-          <height>351</height>
+          <width>491</width>
+          <height>441</height>
          </rect>
         </property>
         <property name="readOnly">
@@ -451,7 +451,7 @@
        <widget class="QLabel" name="label_22">
         <property name="geometry">
          <rect>
-          <x>370</x>
+          <x>400</x>
           <y>0</y>
           <width>101</width>
           <height>17</height>
@@ -464,7 +464,7 @@
        <widget class="QLabel" name="label_25">
         <property name="geometry">
          <rect>
-          <x>190</x>
+          <x>200</x>
           <y>20</y>
           <width>67</width>
           <height>17</height>
@@ -477,10 +477,10 @@
        <widget class="QTableWidget" name="tableAreaGaussJordan">
         <property name="geometry">
          <rect>
-          <x>190</x>
+          <x>200</x>
           <y>40</y>
-          <width>121</width>
-          <height>331</height>
+          <width>161</width>
+          <height>421</height>
          </rect>
         </property>
        </widget>
@@ -505,7 +505,7 @@
        <widget class="QRadioButton" name="radioButtonComp">
         <property name="geometry">
          <rect>
-          <x>680</x>
+          <x>730</x>
           <y>0</y>
           <width>161</width>
           <height>22</height>
@@ -520,8 +520,8 @@
          <rect>
           <x>0</x>
           <y>40</y>
-          <width>121</width>
-          <height>331</height>
+          <width>151</width>
+          <height>421</height>
          </rect>
         </property>
        </widget>
@@ -541,7 +541,7 @@
        <widget class="QLabel" name="label_8">
         <property name="geometry">
          <rect>
-          <x>420</x>
+          <x>470</x>
           <y>0</y>
           <width>231</width>
           <height>17</height>
@@ -554,10 +554,10 @@
        <widget class="QTableWidget" name="tableRGaussJordanComp">
         <property name="geometry">
          <rect>
-          <x>500</x>
+          <x>470</x>
           <y>40</y>
-          <width>121</width>
-          <height>331</height>
+          <width>161</width>
+          <height>421</height>
          </rect>
         </property>
        </widget>
@@ -565,8 +565,8 @@
         <property name="geometry">
          <rect>
           <x>90</x>
-          <y>380</y>
-          <width>401</width>
+          <y>470</y>
+          <width>371</width>
           <height>17</height>
          </rect>
         </property>
@@ -578,7 +578,7 @@
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>410</y>
+          <y>500</y>
           <width>81</width>
           <height>17</height>
          </rect>
@@ -591,8 +591,8 @@
         <property name="geometry">
          <rect>
           <x>90</x>
-          <y>440</y>
-          <width>401</width>
+          <y>530</y>
+          <width>381</width>
           <height>17</height>
          </rect>
         </property>
@@ -604,7 +604,7 @@
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>440</y>
+          <y>530</y>
           <width>91</width>
           <height>17</height>
          </rect>
@@ -617,7 +617,7 @@
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>380</y>
+          <y>470</y>
           <width>81</width>
           <height>17</height>
          </rect>
@@ -630,8 +630,8 @@
         <property name="geometry">
          <rect>
           <x>90</x>
-          <y>410</y>
-          <width>401</width>
+          <y>500</y>
+          <width>371</width>
           <height>17</height>
          </rect>
         </property>
@@ -642,8 +642,8 @@
        <widget class="QLabel" name="label_18">
         <property name="geometry">
          <rect>
-          <x>500</x>
-          <y>380</y>
+          <x>470</x>
+          <y>470</y>
           <width>81</width>
           <height>17</height>
          </rect>
@@ -655,9 +655,9 @@
        <widget class="QLabel" name="labelInterationsGaussJordanComp">
         <property name="geometry">
          <rect>
-          <x>590</x>
-          <y>410</y>
-          <width>251</width>
+          <x>560</x>
+          <y>500</y>
+          <width>331</width>
           <height>17</height>
          </rect>
         </property>
@@ -668,9 +668,9 @@
        <widget class="QLabel" name="labelTimeGaussJordanComp">
         <property name="geometry">
          <rect>
-          <x>590</x>
-          <y>380</y>
-          <width>251</width>
+          <x>560</x>
+          <y>470</y>
+          <width>331</width>
           <height>17</height>
          </rect>
         </property>
@@ -681,8 +681,8 @@
        <widget class="QLabel" name="label_19">
         <property name="geometry">
          <rect>
-          <x>500</x>
-          <y>440</y>
+          <x>470</x>
+          <y>530</y>
           <width>91</width>
           <height>17</height>
          </rect>
@@ -694,8 +694,8 @@
        <widget class="QLabel" name="label_20">
         <property name="geometry">
          <rect>
-          <x>500</x>
-          <y>410</y>
+          <x>470</x>
+          <y>500</y>
           <width>81</width>
           <height>17</height>
          </rect>
@@ -707,9 +707,9 @@
        <widget class="QLabel" name="labelErrorGaussJordanComp">
         <property name="geometry">
          <rect>
-          <x>590</x>
-          <y>440</y>
-          <width>251</width>
+          <x>560</x>
+          <y>530</y>
+          <width>331</width>
           <height>17</height>
          </rect>
         </property>
@@ -735,15 +735,15 @@
          <rect>
           <x>690</x>
           <y>40</y>
-          <width>121</width>
-          <height>331</height>
+          <width>161</width>
+          <height>421</height>
          </rect>
         </property>
        </widget>
        <widget class="QLabel" name="label_28">
         <property name="geometry">
          <rect>
-          <x>180</x>
+          <x>200</x>
           <y>20</y>
           <width>67</width>
           <height>17</height>
@@ -756,10 +756,10 @@
        <widget class="QTableWidget" name="tableAreaGaussComp">
         <property name="geometry">
          <rect>
-          <x>180</x>
+          <x>200</x>
           <y>40</y>
-          <width>121</width>
-          <height>331</height>
+          <width>161</width>
+          <height>421</height>
          </rect>
         </property>
        </widget>
@@ -779,7 +779,7 @@
        <widget class="QLabel" name="label_30">
         <property name="geometry">
          <rect>
-          <x>500</x>
+          <x>470</x>
           <y>20</y>
           <width>67</width>
           <height>17</height>
@@ -799,8 +799,8 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>851</width>
-          <height>461</height>
+          <width>891</width>
+          <height>551</height>
          </rect>
         </property>
        </widget>

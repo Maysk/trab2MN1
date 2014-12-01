@@ -56,6 +56,7 @@ void MainWindow::setDimensionNxN(int N,QTableWidget *table){
 void MainWindow::setDimensionNx1(int N,QTableWidget *table){
     table->setRowCount(N);
     table->setColumnCount(1);
+    table->setColumnWidth(0,table->width()-19);
     for (int i = 0; i < N; i++) {
         QTableWidgetItem *item = new QTableWidgetItem;
         item->setText(QString("0"));
@@ -149,7 +150,7 @@ void MainWindow::setResultMethod(GaussTemplate *method, int type){
     else{
         raios = new Matrix(matrixC->getHeight(),matrixD->getWidth());
         areas = new Matrix(matrixC->getHeight(),matrixD->getWidth());
-        sError = QString("Nao foi possivel calcular os raios utilizando o metodo escolhido");
+        sError = QString("Nao foi possivel solucionar o sistema");
     }
     sTime = QString::number(method->getExecutionTime(),'g',12);
     sInterations = QString::number(method->getResults()->getLength()-1,'g',12);
