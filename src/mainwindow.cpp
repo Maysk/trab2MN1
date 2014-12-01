@@ -225,10 +225,12 @@ void MainWindow::setTable(Matrix *matrix, QTableWidget *table){
     double collumns = matrix->getWidth();
     for(int i = 0 ; i < lines ; i++){
         for(int j = 0 ; j < collumns;j++){
+            //cout<<"r:"<<i<<" "<<j<<" "<<matrix->getValue(i,j)<<endl;
             QTableWidgetItem *cell = table->item(i,j);
             cell->setText(QString::number(matrix->getValue(i,j),'g',10));
         }
     }
+    //cout<<"\n";
 
 }
 
