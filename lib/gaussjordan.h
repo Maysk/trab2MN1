@@ -4,5 +4,5 @@ class GaussJordan : public GaussTemplate{
 public:
     GaussJordan(Matrix* independentTermsMatrix, Matrix* coefficientMatrix);
 
-    void resolveSytem();
+    void resolveSytem( bool usePivot );
 };

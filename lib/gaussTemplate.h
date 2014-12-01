@@ -41,7 +41,7 @@ public:
 
     bool isSolvable();
 
-    virtual void resolveSytem() = 0;
+    virtual void resolveSytem( bool usePivot ) = 0;
 
     double getError();
 };

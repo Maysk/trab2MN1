@@ -2,7 +2,7 @@
 Gauss::Gauss(Matrix* independentTermsMatrix, Matrix* coefficientMatrix)
     :GaussTemplate(independentTermsMatrix, coefficientMatrix){}
 
-void Gauss::resolveSytem(){
+void Gauss::resolveSytem( bool usePivot ){
     int numberOfLines;
     double multiplier;
     double newValue_aij;

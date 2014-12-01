@@ -4,7 +4,7 @@ GaussJordan::GaussJordan(Matrix* independentTermsMatrix, Matrix* coefficientMatr
     :GaussTemplate(independentTermsMatrix, coefficientMatrix){}
 
 
-void GaussJordan::resolveSytem(){
+void GaussJordan::resolveSytem( bool usePivot ){
     int numberOfLines;
     double multiplier;
     double newValue_aij;
@@ -25,7 +25,7 @@ void GaussJordan::resolveSytem(){
 //        independentTerms->printMatrix();
 //        coefficients->printMatrix();
 
-        if( independentTerms->getValue(k,k) == 0 ){
+        if( independentTerms->getValue(k,k) == 0 && usePivot == true ){
             pivoting( independentTerms, coefficients, numberOfLines, k );
 
         }

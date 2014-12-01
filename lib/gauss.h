@@ -3,6 +3,6 @@ class Gauss : public GaussTemplate{
 public:
     Gauss(Matrix* independentTermsMatrix, Matrix* coefficientMatrix);
 
-    void resolveSytem();
+    void resolveSytem( bool usePivot );
 
 };
