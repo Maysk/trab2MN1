@@ -42,12 +42,17 @@ void GaussJordan::resolveSytem( bool usePivot ){
                 independentTerms->setValue( k, j, multiplier );
             }
 
+
             newValue_bi = coefficients->getValue(k,0) / pivo;
             coefficients->setValue( k, 0, newValue_bi );
             independentTerms->setValue( k, k, 1 );
 
             end = clock();
             executionTime = executionTime + (end - start);
+
+            description<<"Operação realizada: L"<< k <<" <- L"<< k <<" * 1/( "<< pivo <<" ) \n";
+            saveOnList(description.str());
+            description.str("");
 
             for(int i = 0; i < numberOfLines; i++ ){
                 if( i != k ){
