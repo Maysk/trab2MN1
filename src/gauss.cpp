@@ -1,6 +1,6 @@
 #include "../lib/imports.h"
-Gauss::Gauss(Matrix* independentTermsMatrix, Matrix* coefficientMatrix)
-    :GaussTemplate(independentTermsMatrix, coefficientMatrix){}
+Gauss::Gauss(Matrix* coefficientMatrix, Matrix* independentTermsMatrix)
+    :GaussTemplate(coefficientMatrix, independentTermsMatrix){}
 
 void Gauss::resolveSytem( bool usePivot ){
     int numberOfLines;
@@ -17,9 +17,9 @@ void Gauss::resolveSytem( bool usePivot ){
 
     beforeSolve();
 
-    Matrix* coefficients = getCoefficienMatrix();
-    Matrix* independentTerms = getIndependentTerms();
-    numberOfLines = independentTerms->getHeight();
+    Matrix* coefficientsMatrix = getCoefficienMatrix();
+    Matrix* independentTermsMatrix = getIndependentTerms();
+    numberOfLines = independentTermsMatrix->getHeight();
 
     saveOnList("Sistema Inicial: \n");
 
@@ -30,10 +30,10 @@ void Gauss::resolveSytem( bool usePivot ){
                 start = clock();
 
                 if(usePivot == true){
-                    pivoting( independentTerms, coefficients, numberOfLines, k );
+                    pivoting( coefficientsMatrix, independentTermsMatrix, numberOfLines, k );
                 }
 
-                pivo = independentTerms->getValue(k,k);
+                pivo = coefficientsMatrix->getValue(k,k);
 
                 if(pivo == 0){
                     end = clock();
@@ -41,16 +41,16 @@ void Gauss::resolveSytem( bool usePivot ){
                     throw 0;
                 }
 
-                multiplier = independentTerms->getValue(i,k)/pivo;
-                independentTerms->setValue(i,k,0);
+                multiplier = coefficientsMatrix->getValue(i,k)/pivo;
+                coefficientsMatrix->setValue(i,k,0);
 
                 for(int j = k + 1; j<numberOfLines; j++){
-                    newValue_aij = independentTerms->getValue(i,j) - multiplier * independentTerms->getValue(k,j);
-                    independentTerms->setValue(i,j,newValue_aij);
+                    newValue_aij = coefficientsMatrix->getValue(i,j) - multiplier * coefficientsMatrix->getValue(k,j);
+                    coefficientsMatrix->setValue(i,j,newValue_aij);
                 }
 
-                newValue_bi = coefficients->getValue(i,0) - multiplier * coefficients->getValue(k,0);
-                coefficients->setValue(i,0,newValue_bi);
+                newValue_bi = independentTermsMatrix->getValue(i,0) - multiplier * independentTermsMatrix->getValue(k,0);
+                independentTermsMatrix->setValue(i,0,newValue_bi);
                 end = clock();
                 executionTime = executionTime + (end - start);
 
@@ -61,7 +61,7 @@ void Gauss::resolveSytem( bool usePivot ){
 
             }
 
-            if(independentTerms->getValue(numberOfLines-1,numberOfLines-1) == 0){
+            if(coefficientsMatrix->getValue(numberOfLines-1,numberOfLines-1) == 0){
                 end = clock();
                 executionTime = executionTime + (end - start);
                 throw 1;

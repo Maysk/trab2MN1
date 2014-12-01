@@ -1,7 +1,7 @@
 #include "../lib/imports.h"
 
 
-GaussTemplate::GaussTemplate(Matrix* independentTermsMatrix, Matrix* coefficientMatrix){
+GaussTemplate::GaussTemplate(Matrix* coefficientMatrix, Matrix* independentTermsMatrix){
     this->independentTermsMatrix = independentTermsMatrix;
     this->coefficientMatrix = coefficientMatrix;
     this->unknownsMatrix = NULL;
@@ -64,23 +64,24 @@ void GaussTemplate::switchRows(Matrix *m, int line_i, int line_j){
 
 
 void GaussTemplate::retroSubstitutions(){
-    Matrix *independentTerms = getIndependentTerms();
-    Matrix *coefficients = getCoefficienMatrix();
-    int numberOfLines = independentTerms->getHeight();
+    Matrix *coefficientsMatrix = getCoefficienMatrix();
+    Matrix *independentTermsMatrix = getIndependentTerms();
+
+    int numberOfLines = independentTermsMatrix->getHeight();
 
     Matrix *unknowns = new Matrix(numberOfLines,1);
     double unknown_k;
     double sum;
 
-    unknown_k = coefficients->getValue(numberOfLines-1,0)/independentTerms->getValue(numberOfLines-1,numberOfLines-1);
+    unknown_k = independentTermsMatrix->getValue(numberOfLines-1,0)/coefficientsMatrix->getValue(numberOfLines-1,numberOfLines-1);
     unknowns->setValue(numberOfLines-1,0,unknown_k);
     for(int k=numberOfLines-2; k>=0; k--){
         sum = 0;
         for (int j=(k + 1); j <= numberOfLines-1; j++){
-            sum = sum + independentTerms->getValue(k,j) * unknowns->getValue(j,0);
+            sum = sum + coefficientsMatrix->getValue(k,j) * unknowns->getValue(j,0);
         }
 
-        unknown_k = (coefficients->getValue(k,0) - sum)/independentTerms->getValue(k,k);
+        unknown_k = (independentTermsMatrix->getValue(k,0) - sum)/coefficientsMatrix->getValue(k,k);
         unknowns->setValue(k,0,unknown_k);
     }
 
@@ -98,7 +99,7 @@ void GaussTemplate::resetList(){
 }
 
 void GaussTemplate::saveOnList(std::string desc){
-    Result* parcialResult = new Result(getIndependentTerms()->getCopy(), getCoefficienMatrix()->getCopy(), desc);
+    Result* parcialResult = new Result(getCoefficienMatrix()->getCopy(), getIndependentTerms()->getCopy(), desc);
     results->push(parcialResult);
 }
 
@@ -149,8 +150,8 @@ void GaussTemplate::setSolvable(bool s){
 
 double GaussTemplate::getError(){
     Matrix *x = unknownsMatrix->getCopy();
-    Matrix *CX = independentTermsMatrix->multipy(x);
-    Matrix *residuo = coefficientMatrix->subtraction(CX);
+    Matrix *CX = coefficientMatrix->multipy(x);
+    Matrix *residuo = independentTermsMatrix->subtraction(CX);
     double maior = 0;
     for(int i = 0; i < residuo->getHeight(); i++)
         for(int j = 0; j < residuo->getWidth(); j++)

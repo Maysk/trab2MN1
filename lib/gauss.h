@@ -1,7 +1,7 @@
 class Gauss : public GaussTemplate{
 
 public:
-    Gauss(Matrix* independentTermsMatrix, Matrix* coefficientMatrix);
+    Gauss(Matrix* coefficientMatrix, Matrix* independentTermsMatrix);
 
     void resolveSytem( bool usePivot );
 

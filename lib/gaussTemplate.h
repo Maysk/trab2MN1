@@ -24,7 +24,7 @@ protected:
     void setSolvable(bool s);
 
 public:
-    GaussTemplate(Matrix* independentTermsMatrix, Matrix* coefficientMatrix);
+    GaussTemplate(Matrix* coefficientMatrix, Matrix* independentTermsMatrix);
 
     void setCoefficienMatrix(Matrix* matrix);
     Matrix *getCoefficienMatrix();

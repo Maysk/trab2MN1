@@ -1,6 +1,6 @@
 class GaussJordan : public GaussTemplate{
 public:
-    GaussJordan(Matrix* independentTermsMatrix, Matrix* coefficientMatrix);
+    GaussJordan(Matrix* coefficientMatrix, Matrix* independentTermsMatrix);
 
     void resolveSytem( bool usePivot );
 };

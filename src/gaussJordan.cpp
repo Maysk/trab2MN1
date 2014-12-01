@@ -1,7 +1,7 @@
 #include "../lib/imports.h"
 
-GaussJordan::GaussJordan(Matrix* independentTermsMatrix, Matrix* coefficientMatrix)
-    :GaussTemplate(independentTermsMatrix, coefficientMatrix){}
+GaussJordan::GaussJordan(Matrix* coefficientMatrix, Matrix* independentTermsMatrix)
+    :GaussTemplate(coefficientMatrix, independentTermsMatrix){}
 
 
 void GaussJordan::resolveSytem( bool usePivot ){
@@ -19,17 +19,17 @@ void GaussJordan::resolveSytem( bool usePivot ){
 
     beforeSolve();
 
-    Matrix* coefficients = getCoefficienMatrix();
-    Matrix* independentTerms = getIndependentTerms();
-    numberOfLines = independentTerms->getHeight();
+    Matrix* coefficientsMatrix = getCoefficienMatrix();
+    Matrix* independentTermsMatrix = getIndependentTerms();
+    numberOfLines = independentTermsMatrix->getHeight();
 
     saveOnList("Sistema Inicial: \n");
     try{
         for(int k = 0; k < numberOfLines; k++ ){
             start = clock();
 
-            if(usePivot == true){ pivoting( independentTerms, coefficients, numberOfLines, k ); }
-            pivo = independentTerms->getValue(k,k);
+            if(usePivot == true){ pivoting( coefficientsMatrix, independentTermsMatrix, numberOfLines, k ); }
+            pivo = coefficientsMatrix->getValue(k,k);
 
             if(pivo == 0){
                 end = clock();
@@ -38,14 +38,14 @@ void GaussJordan::resolveSytem( bool usePivot ){
             }
 
             for(int j = k+1; j < numberOfLines; j++ ){
-                multiplier = independentTerms->getValue( k, j ) / pivo;
-                independentTerms->setValue( k, j, multiplier );
+                multiplier = coefficientsMatrix->getValue( k, j ) / pivo;
+                coefficientsMatrix->setValue( k, j, multiplier );
             }
 
 
-            newValue_bi = coefficients->getValue(k,0) / pivo;
-            coefficients->setValue( k, 0, newValue_bi );
-            independentTerms->setValue( k, k, 1 );
+            newValue_bi = independentTermsMatrix->getValue(k,0) / pivo;
+            independentTermsMatrix->setValue( k, 0, newValue_bi );
+            coefficientsMatrix->setValue( k, k, 1 );
 
             end = clock();
             executionTime = executionTime + (end - start);
@@ -58,15 +58,15 @@ void GaussJordan::resolveSytem( bool usePivot ){
                 if( i != k ){
                     start=clock();
 
-                    multiplier = independentTerms->getValue(i,k);
+                    multiplier = coefficientsMatrix->getValue(i,k);
                     for(int j = k + 1; j < numberOfLines; j++ ){
-                        newValue_aij = independentTerms->getValue( i, j ) - multiplier * independentTerms->getValue( k, j );
-                        independentTerms->setValue( i, j, newValue_aij );
+                        newValue_aij = coefficientsMatrix->getValue( i, j ) - multiplier * coefficientsMatrix->getValue( k, j );
+                        coefficientsMatrix->setValue( i, j, newValue_aij );
                     }
 
-                    newValue_bi = coefficients->getValue( i, 0 ) - multiplier * coefficients->getValue( k, 0 );
-                    coefficients->setValue( i, 0, newValue_bi );
-                    independentTerms->setValue( i, k, 0 );
+                    newValue_bi = independentTermsMatrix->getValue( i, 0 ) - multiplier * independentTermsMatrix->getValue( k, 0 );
+                    independentTermsMatrix->setValue( i, 0, newValue_bi );
+                    coefficientsMatrix->setValue( i, k, 0 );
 
                     end = clock();
                     executionTime = executionTime + (end - start);
