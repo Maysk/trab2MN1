@@ -7,8 +7,6 @@ GaussJordan::GaussJordan(Matrix* coefficientMatrix, Matrix* independentTermsMatr
 void GaussJordan::resolveSytem( bool usePivot ){
     int numberOfLines;
     double multiplier;
-    double newValue_aij;
-    double newValue_bi;
     double pivo;
     long double executionTimeInSec = 0;
 
@@ -19,7 +17,7 @@ void GaussJordan::resolveSytem( bool usePivot ){
 
     beforeSolve();
 
-    Matrix* coefficientsMatrix = getCoefficienMatrix();
+    Matrix* coefficientsMatrix = getCoefficientMatrix();
     Matrix* independentTermsMatrix = getIndependentTerms();
     numberOfLines = independentTermsMatrix->getHeight();
 
@@ -29,6 +27,7 @@ void GaussJordan::resolveSytem( bool usePivot ){
             start = clock();
 
             if(usePivot == true){ pivoting( coefficientsMatrix, independentTermsMatrix, numberOfLines, k ); }
+
             pivo = coefficientsMatrix->getValue(k,k);
 
             if(pivo == 0){
@@ -37,19 +36,10 @@ void GaussJordan::resolveSytem( bool usePivot ){
                 throw 0;
             }
 
-            for(int j = k+1; j < numberOfLines; j++ ){
-                multiplier = coefficientsMatrix->getValue( k, j ) / pivo;
-                coefficientsMatrix->setValue( k, j, multiplier );
-            }
-
-
-            newValue_bi = independentTermsMatrix->getValue(k,0) / pivo;
-            independentTermsMatrix->setValue( k, 0, newValue_bi );
-            coefficientsMatrix->setValue( k, k, 1 );
+            multiplyRowByScalar(coefficientsMatrix, independentTermsMatrix, k, 1/pivo);
 
             end = clock();
             executionTime = executionTime + (end - start);
-
             description<<"Operação realizada: L"<< k <<" <- L"<< k <<" * 1/( "<< pivo <<" ) \n";
             saveOnList(description.str());
             description.str("");
@@ -59,14 +49,8 @@ void GaussJordan::resolveSytem( bool usePivot ){
                     start=clock();
 
                     multiplier = coefficientsMatrix->getValue(i,k);
-                    for(int j = k + 1; j < numberOfLines; j++ ){
-                        newValue_aij = coefficientsMatrix->getValue( i, j ) - multiplier * coefficientsMatrix->getValue( k, j );
-                        coefficientsMatrix->setValue( i, j, newValue_aij );
-                    }
 
-                    newValue_bi = independentTermsMatrix->getValue( i, 0 ) - multiplier * independentTermsMatrix->getValue( k, 0 );
-                    independentTermsMatrix->setValue( i, 0, newValue_bi );
-                    coefficientsMatrix->setValue( i, k, 0 );
+                    addRowByOtherRowMultipliedByScalar(coefficientsMatrix, independentTermsMatrix, i, k, multiplier);
 
                     end = clock();
                     executionTime = executionTime + (end - start);

@@ -68,7 +68,7 @@ std::string ListResults::toString(){
     saida.append("Passo a Passo da resolução do Sistema:\n");
     noAtual = copiaResults.pop();
     saida.append(noAtual->getDescription());
-    saida.append(noAtual->getCoefficienMatrix()->toString()+"\n");
+    saida.append(noAtual->getCoefficientMatrix()->toString()+"\n");
     saida.append(noAtual->getIndependentTerms()->toString());
     saida.append("\n");
 
@@ -77,7 +77,7 @@ std::string ListResults::toString(){
     for (int i = 0; i < numeroPassos; i++){
         noAtual = copiaResults.pop();
         saida.append(noAtual->getDescription());
-        saida.append("Matriz dos Coeficientes:\n" + noAtual->getCoefficienMatrix()->toString());
+        saida.append("Matriz dos Coeficientes:\n" + noAtual->getCoefficientMatrix()->toString());
         saida.append("Matriz dos Termos Independentes:\n" + noAtual->getIndependentTerms()->toString());
         saida.append("\n");
     }

@@ -19,15 +19,19 @@ protected:
 
     void pivoting(Matrix* A, Matrix* b, int numberOfLines, int k);
 
-    void switchRows(Matrix *m, int line_i, int line_j);
+    void addRowByOtherRowMultipliedByScalar(Matrix* A, Matrix* b, int line_i,int line_j, double scalar);
+
+    void multiplyRowByScalar(Matrix* A, Matrix* b, int line_i, double scalar);
+
+    void switchRows(Matrix* m, int line_i, int line_j);
 
     void setSolvable(bool s);
 
 public:
     GaussTemplate(Matrix* coefficientMatrix, Matrix* independentTermsMatrix);
 
-    void setCoefficienMatrix(Matrix* matrix);
-    Matrix *getCoefficienMatrix();
+    void setCoefficientMatrix(Matrix* matrix);
+    Matrix *getCoefficientMatrix();
 
     void setIndependentTerms(Matrix* matrix);
     Matrix *getIndependentTerms();

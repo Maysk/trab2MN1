@@ -1,5 +1,4 @@
 class Gauss : public GaussTemplate{
-
 public:
     Gauss(Matrix* coefficientMatrix, Matrix* independentTermsMatrix);
 

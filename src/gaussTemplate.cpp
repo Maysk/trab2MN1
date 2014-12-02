@@ -10,11 +10,11 @@ GaussTemplate::GaussTemplate(Matrix* coefficientMatrix, Matrix* independentTerms
     this->executionTime = 0;
 }
 
-void GaussTemplate::setCoefficienMatrix(Matrix* matrix){
+void GaussTemplate::setCoefficientMatrix(Matrix* matrix){
     this->coefficientMatrix = matrix;
 }
 
-Matrix *GaussTemplate::getCoefficienMatrix(){
+Matrix *GaussTemplate::getCoefficientMatrix(){
     return this->coefficientMatrix;
 }
 
@@ -31,11 +31,11 @@ Matrix *GaussTemplate::getUnknownsMatrix(){
 
 void GaussTemplate::beforeSolve(){
     Matrix* copy1 = getIndependentTerms()->getCopy();
-    Matrix* copy2 = getCoefficienMatrix()->getCopy();
+    Matrix* copy2 = getCoefficientMatrix()->getCopy();
     this->independentTermsMatrixTemp = getIndependentTerms();
-    this->coefficientMatrixTemp = getCoefficienMatrix();
+    this->coefficientMatrixTemp = getCoefficientMatrix();
     setIndependentTerms(copy1);
-    setCoefficienMatrix(copy2);    
+    setCoefficientMatrix(copy2);
 
     setSolvable(true);
     setExecutionTime(0);
@@ -46,9 +46,9 @@ void GaussTemplate::beforeSolve(){
 
 void GaussTemplate::afterSolve(){
     delete getIndependentTerms();
-    delete getCoefficienMatrix();
+    delete getCoefficientMatrix();
     setIndependentTerms(this->independentTermsMatrixTemp);
-    setCoefficienMatrix(this->coefficientMatrixTemp);
+    setCoefficientMatrix(this->coefficientMatrixTemp);
 }
 
 
@@ -64,7 +64,7 @@ void GaussTemplate::switchRows(Matrix *m, int line_i, int line_j){
 
 
 void GaussTemplate::retroSubstitutions(){
-    Matrix *coefficientsMatrix = getCoefficienMatrix();
+    Matrix *coefficientsMatrix = getCoefficientMatrix();
     Matrix *independentTermsMatrix = getIndependentTerms();
 
     int numberOfLines = independentTermsMatrix->getHeight();
@@ -99,7 +99,7 @@ void GaussTemplate::resetList(){
 }
 
 void GaussTemplate::saveOnList(std::string desc){
-    Result* parcialResult = new Result(getCoefficienMatrix()->getCopy(), getIndependentTerms()->getCopy(), desc);
+    Result* parcialResult = new Result(getCoefficientMatrix()->getCopy(), getIndependentTerms()->getCopy(), desc);
     results->push(parcialResult);
 }
 
@@ -160,4 +160,29 @@ double GaussTemplate::getError(){
     return fabs(maior);
 
 
+}
+
+void GaussTemplate::multiplyRowByScalar(Matrix* A, Matrix* b, int line_i, double scalar){
+    int numberOfColumns = A->getWidth();
+    double newValue;
+
+    for(int j = line_i; j <= numberOfColumns; j++ ){
+        newValue = A->getValue( line_i, j ) * scalar;
+        A->setValue( line_i, j, newValue );
+    }
+
+    b->setValue( line_i, 0, b->getValue(line_i,0) * scalar);
+}
+
+void GaussTemplate::addRowByOtherRowMultipliedByScalar(Matrix *A, Matrix *b, int line_i, int line_j, double scalar){
+    int numberOfColumns = A->getWidth();
+    double newValue;
+
+    for(int k = line_j; k <= numberOfColumns; k++ ){
+        newValue = A->getValue(line_i, k ) - scalar * A->getValue( line_j, k );
+        A->setValue( line_i, k, newValue );
+    }
+
+    newValue = b->getValue( line_i, 0 ) - scalar * b->getValue( line_j, 0 );
+    b->setValue( line_i, 0, newValue );
 }

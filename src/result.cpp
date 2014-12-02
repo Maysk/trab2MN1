@@ -19,11 +19,11 @@ std::string Result::getDescription(){
     return this->description;
 }
 
-void Result::setCoefficienMatrix(Matrix *matrix){
+void Result::setCoefficientMatrix(Matrix *matrix){
     this->coefficientMatrix = matrix;
 }
 
-Matrix *Result::getCoefficienMatrix(){
+Matrix *Result::getCoefficientMatrix(){
     return this->coefficientMatrix;
 }
 

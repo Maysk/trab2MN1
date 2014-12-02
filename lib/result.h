@@ -10,8 +10,8 @@ public:
     void setDescription(std::string description);
     std::string getDescription();
 
-    void setCoefficienMatrix(Matrix *matrix);
-    Matrix *getCoefficienMatrix();
+    void setCoefficientMatrix(Matrix *matrix);
+    Matrix *getCoefficientMatrix();
 
     void setIndependentTerms(Matrix* matrix);
     Matrix *getIndependentTerms();
